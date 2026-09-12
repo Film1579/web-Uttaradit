@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="th" data-base="../">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ข่าวสารประจำจังหวัด | จังหวัดอุตรดิตถ์</title>
+<meta name="description" content="ข่าวประชาสัมพันธ์ ประกาศจัดซื้อจัดจ้าง รับสมัครงาน และกิจกรรมของจังหวัดอุตรดิตถ์">
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500;600;700&family=Sarabun:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/pages.css">
+<link rel="stylesheet" href="../css/responsive.css">
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#12484A">
+</head>
+<body>
+
+<section class="phead">
+  <div class="container">
+    <nav class="crumb" aria-label="เส้นทางนำทาง"><ol>
+      <li><a href="../index.html">หน้าแรก</a></li>
+      <li aria-current="page">ข่าวสารประจำจังหวัด</li>
+    </ol></nav>
+    <h1>ข่าวสารประจำจังหวัด</h1>
+    <p>ข่าวประชาสัมพันธ์ ประกาศจัดซื้อจัดจ้าง รับสมัครงาน และกิจกรรมสำคัญของจังหวัดอุตรดิตถ์</p>
+  </div>
+</section>
+
+<main id="main" class="container layout">
+  <div>
+    <div class="sec__head sec__head--row" style="margin-bottom:20px">
+      <div class="tabs" role="tablist" aria-label="หมวดหมู่ข่าว" id="newsTabs"></div>
+      <form role="search" onsubmit="return false" class="news__search">
+        <label class="sr-only" for="newsQ">ค้นหาข่าว</label>
+        <input id="newsQ" type="search" placeholder="ค้นหาหัวข้อข่าว…">
+      </form>
+    </div>
+    <div id="newsPanel" role="tabpanel" tabindex="0" aria-live="polite">
+      <ul class="cards" id="newsGrid"></ul>
+      <p class="empty" id="newsEmpty" hidden>ไม่พบข่าวที่ตรงกับเงื่อนไข</p>
+    </div>
+    <nav class="pager" id="newsPager" aria-label="แบ่งหน้าข่าว"></nav>
+  </div>
+
+  <aside class="side">
+    <div class="panel">
+      <h2>ข่าวล่าสุด</h2>
+      <ul id="sideLatest"></ul>
+    </div>
+    <div class="panel">
+      <h2>หมวดหมู่</h2>
+      <ul id="sideCats"></ul>
+    </div>
+    <div class="panel">
+      <h2>ลิงก์ที่เกี่ยวข้อง</h2>
+      <ul>
+        <li><a href="ita.html">ข้อมูล ITA / OIT</a></li>
+        <li><a href="../index.html#services">e-Service ของจังหวัด</a></li>
+        <li><a href="contact.html">ศูนย์ดำรงธรรมจังหวัด</a></li>
+      </ul>
+    </div>
+  </aside>
+</main>
+
+<script src="../js/img-fallback.js"></script>
+<script src="../js/ui.js"></script>
+<script src="../js/config.js"></script>
+<script src="../js/shell.js"></script>
+<script src="../js/page-news.js"></script>
+</body>
+</html>
+
+

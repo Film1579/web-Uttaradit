@@ -1,0 +1,47 @@
+.pl{position:fixed;inset:0;z-index:9999;background:radial-gradient(120% 90% at 50% 40%,#0F3B3C 0%,#08211F 55%,#04100F 100%);display:grid;place-items:center;overflow:hidden;transition:opacity 1s var(--ease),visibility 1s}
+.pl__fog{position:absolute;inset:0;width:100%;height:100%;opacity:.85}
+.pl__vignette{position:absolute;inset:0;background:radial-gradient(60% 60% at 50% 45%,transparent 0%,rgba(2,10,10,.72) 100%);pointer-events:none}
+.pl__stage{position:relative;text-align:center;padding:24px}
+
+/* ชั้นหมอกซ้อน 3 ระดับ = ความลึกของภาพ (parallax depth) */
+.pl__layer{position:absolute;inset:-30%;background-repeat:repeat-x;background-size:auto 100%;pointer-events:none;mix-blend-mode:screen}
+.pl__layer--back{background-image:radial-gradient(closest-side,rgba(120,190,185,.16),transparent 70%);animation:fogDrift 46s linear infinite;opacity:.55}
+.pl__layer--mid{background-image:radial-gradient(closest-side,rgba(199,155,59,.13),transparent 70%);animation:fogDrift 30s linear infinite reverse;opacity:.5}
+.pl__layer--front{background-image:radial-gradient(closest-side,rgba(255,255,255,.10),transparent 70%);animation:fogDrift 19s linear infinite;opacity:.4}
+@keyframes fogDrift{from{transform:translate3d(-12%,0,0) scale(1)}50%{transform:translate3d(6%,-3%,0) scale(1.09)}to{transform:translate3d(-12%,0,0) scale(1)}}
+
+.pl__content{position:relative;z-index:2}
+.pl__seal{margin:0 auto 20px;filter:drop-shadow(0 8px 24px rgba(0,0,0,.6));opacity:0;transform:translateY(16px) scale(.9);animation:plIn .9s var(--ease) .25s forwards}
+
+/* หัวเรื่องเปิดเผยทีละอักษร = ลำดับการเปิดเผย (staggered reveal) */
+.pl__title{font-family:var(--ff-head,"Kanit",sans-serif);font-size:clamp(2.6rem,9vw,5rem);color:#fff;letter-spacing:.06em;margin:0 0 8px;display:flex;justify-content:center;gap:.02em}
+.pl__title span{display:inline-block;opacity:0;transform:translateY(38px) rotateX(-60deg);filter:blur(10px);animation:letterIn .95s var(--ease) forwards}
+.pl__title span:nth-child(1){animation-delay:.45s}
+.pl__title span:nth-child(2){animation-delay:.57s}
+.pl__title span:nth-child(3){animation-delay:.69s}
+.pl__title span:nth-child(4){animation-delay:.81s}
+.pl__title span:nth-child(5){animation-delay:.93s}
+.pl__title span:nth-child(6){animation-delay:1.05s}
+@keyframes letterIn{to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes plIn{to{opacity:1;transform:none}}
+
+.pl__sub{color:#9FC4C0;letter-spacing:.28em;font-size:.8rem;text-transform:uppercase;margin:0 0 30px;opacity:0;animation:plIn .8s var(--ease) 1.25s forwards}
+.pl__bar{width:min(300px,70vw);height:3px;margin:0 auto;background:rgba(255,255,255,.16);border-radius:99px;overflow:hidden}
+.pl__bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#57A3A0,#C79B3B);border-radius:99px;transition:width .35s var(--ease)}
+.pl__pct{color:#C79B3B;font-size:.8rem;letter-spacing:.2em;margin:12px 0 0}
+.pl__skip{margin-top:26px;background:transparent;border:1px solid rgba(255,255,255,.3);color:#DCEAE8;padding:9px 22px;border-radius:99px;cursor:pointer;font-size:.85rem;opacity:0;animation:plIn .6s var(--ease) 1.6s forwards;transition:background .25s}
+.pl__skip:hover{background:rgba(255,255,255,.14)}
+.pl__skip kbd{background:rgba(255,255,255,.16);border-radius:4px;padding:1px 6px;font-size:.75rem}
+
+/* ---- STATE MACHINE ---- */
+.pl[data-state="revealing"]{opacity:0;visibility:hidden;transform:scale(1.05)}
+.pl[data-state="revealing"] .pl__content{opacity:0;transform:translateY(-26px);transition:.7s var(--ease)}
+.pl[data-state="complete"],.pl[data-state="skipped"]{display:none}
+
+@media (prefers-reduced-motion:reduce){
+  .pl__layer,.pl__fog{animation:none!important;opacity:.25}
+  .pl__title span{opacity:1;transform:none;filter:none;animation:none}
+  .pl__seal,.pl__sub,.pl__skip{opacity:1;animation:none}
+}
+
+

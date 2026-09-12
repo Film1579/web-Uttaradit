@@ -1,0 +1,652 @@
+/* =========================================================
+   PAGES.CSS — MERGED VERSION
+   รองรับโครงสร้าง class ของ pages.css ทั้งสองชุด
+   ========================================================= */
+
+/* ===== PAGE HEADER / PAGE HEAD ===== */
+.phead{
+  position:relative;
+  background:linear-gradient(120deg,var(--brand-700) 0%,var(--brand-500) 100%);
+  color:#fff;
+  padding:clamp(52px,6vw,64px) 0 clamp(42px,5vw,52px);
+  overflow:hidden;
+}
+.phead::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:url("../assets/img/pattern.svg") center/420px repeat;
+  opacity:.06;
+  pointer-events:none;
+}
+.phead__in{position:relative;z-index:1}
+.phead h1{
+  font-size:clamp(1.6rem,4vw,2.6rem);
+  margin:8px 0 6px;
+  position:relative;
+}
+.phead p{
+  margin:0;
+  color:#B9CFCD;
+  max-width:680px;
+  position:relative;
+}
+
+/* ===== BREADCRUMB ===== */
+.crumb{position:relative;margin:0 0 16px;font-size:.86rem}
+.crumb ol{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  align-items:center;
+  padding:0;
+  margin:0;
+  list-style:none;
+}
+.crumb li::after{content:"›";margin-left:8px;opacity:.6}
+.crumb li:last-child::after{content:""}
+.crumb a{color:var(--gold-300)}
+.crumb [aria-current="page"]{color:#DCEAE8;opacity:.9}
+.crumb--light a{color:var(--link)}
+.crumb--light [aria-current="page"]{color:var(--muted)}
+
+/* ===== LAYOUT ===== */
+.layout{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 320px;
+  gap:44px;
+  align-items:start;
+  padding:clamp(40px,6vw,76px) 0;
+}
+.layout>*{min-width:0}
+.side{position:sticky;top:104px;display:grid;gap:20px}
+.panel{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:22px;
+}
+.panel h2,.panel h3{
+  font-size:1.02rem;
+  margin:0 0 14px;
+  padding-bottom:10px;
+  border-bottom:2px solid var(--gold-500);
+  display:inline-block;
+}
+.panel ul{display:grid;gap:10px}
+.panel ul li{padding:9px 0;border-bottom:1px dashed var(--line);font-size:.9rem}
+.panel ul li:last-child{border:0}
+.panel li a{
+  color:var(--ink);
+  font-size:.92rem;
+  display:flex;
+  gap:10px;
+}
+.panel li a:hover{color:var(--link)}
+.toc a.is-active{color:var(--accent);font-weight:700}
+.panel time,.panel li>span{display:block;font-size:.78rem;color:var(--muted)}
+
+/* ===== ARTICLE — รองรับทั้ง .art และ .article ===== */
+.art,.article{
+  background:var(--surface);
+}
+.article{
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:clamp(22px,4vw,42px);
+}
+
+.art__meta,.article__meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  align-items:center;
+  color:var(--muted);
+  font-size:.88rem;
+  margin-bottom:18px;
+  padding-bottom:18px;
+  border-bottom:1px solid var(--line);
+}
+.article__meta{gap:16px;padding-bottom:16px;margin-bottom:22px}
+
+.art__meta .badge{
+  background:var(--brand-500);
+  color:#fff;
+  padding:4px 14px;
+  border-radius:999px;
+  font-size:.78rem;
+}
+.article__meta .chip{
+  background:var(--tint);
+  color:var(--brand-700);
+  padding:4px 14px;
+  border-radius:999px;
+  font-weight:600;
+}
+
+.art h1,.article h1{
+  font-size:clamp(1.4rem,3.4vw,2.15rem);
+  line-height:1.45;
+}
+.art__cover{
+  border-radius:var(--radius);
+  overflow:hidden;
+  margin:0 0 26px;
+}
+.art__cover img{
+  width:100%;
+  aspect-ratio:16/9;
+  object-fit:cover;
+}
+.art__cover figcaption{
+  font-size:.84rem;
+  color:var(--muted);
+  padding:10px 4px;
+  text-align:center;
+}
+.article__lead{
+  font-size:1.06rem;
+  color:var(--accent);
+  font-weight:500;
+  border-left:4px solid var(--gold-500);
+  padding-left:16px;
+  margin:0 0 26px;
+}
+
+/* ===== ARTICLE BODY — รักษาคลาสเดิมทั้งสองชุด ===== */
+.art__body{
+  font-size:1.03rem;
+  line-height:1.95;
+}
+.article__body>*{margin:0 0 1.15em}
+
+.art__body h2,.article__body h2{
+  font-size:1.25rem;
+  margin:34px 0 12px;
+}
+.article__body h2{margin-top:1.8em}
+
+.art__body h3{
+  font-size:1.1rem;
+  margin:26px 0 10px;
+}
+.art__body p{margin:0 0 18px}
+.art__body ul,.art__body ol{
+  margin:0 0 18px 24px;
+  list-style:revert;
+}
+.article__body ul{
+  list-style:disc;
+  padding-left:1.4em;
+  display:grid;
+  gap:.5em;
+}
+.art__body li{margin-bottom:8px}
+
+.art__body img{
+  max-width:100%;
+  height:auto;
+  border-radius:var(--radius);
+}
+.article__body img{
+  border-radius:var(--radius);
+  margin:1.6em 0;
+}
+
+.art__body blockquote,.article__body blockquote{
+  margin:24px 0;
+  padding:18px 24px;
+  background:var(--tint);
+  border-left:5px solid var(--brand-500);
+  border-radius:0 8px 8px 0;
+}
+.article__body blockquote{
+  margin:0;
+  padding:18px 22px;
+  border-left:4px solid var(--brand-500);
+  color:var(--accent);
+}
+
+.art__body table,.article__body table{
+  width:100%;
+  border-collapse:collapse;
+  margin:0 0 22px;
+  font-size:.94rem;
+}
+.art__body th,.art__body td,
+.article__body th,.article__body td{
+  border:1px solid var(--line);
+  padding:11px 14px;
+  text-align:left;
+}
+.art__body th,.article__body th{
+  background:var(--tint);
+  font-family:var(--ff-head);
+}
+
+/* ===== FILES — รองรับ .art__files และ .files ===== */
+.art__files,.files{
+  display:grid;
+  gap:10px;
+  margin:28px 0;
+}
+.files{margin-top:8px}
+.art__files a,.files a{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:14px 18px;
+  background:var(--tint);
+  border:1px solid var(--line);
+  border-radius:var(--radius-sm);
+  color:var(--ink);
+}
+.files a{padding:14px 16px}
+.art__files a:hover,.files a:hover{
+  border-color:var(--link);
+  background:var(--surface);
+  text-decoration:none;
+}
+.files .ext{
+  background:var(--brand-700);
+  color:#fff;
+  font-size:.72rem;
+  font-weight:700;
+  padding:3px 9px;
+  border-radius:5px;
+  font-family:var(--ff-head);
+}
+.art__files small,.files .sz{
+  margin-left:auto;
+  color:var(--muted);
+  font-size:.83rem;
+}
+
+/* ===== SHARE ===== */
+.share{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin:30px 0;
+  padding-top:22px;
+  border-top:1px solid var(--line);
+}
+.share b{font-size:.9rem}
+.share button,.share a{
+  width:42px;
+  height:42px;
+  display:grid;
+  place-items:center;
+  border:1px solid var(--line);
+  background:var(--surface);
+  border-radius:50%;
+  cursor:pointer;
+  color:var(--ink);
+}
+.share button{font-size:1rem}
+.share button:hover,.share a:hover{
+  background:var(--brand-700);
+  color:#fff;
+  border-color:var(--brand-700);
+}
+
+/* ===== TAGS ===== */
+.tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:26px;
+}
+.tags a{
+  font-size:.82rem;
+  padding:6px 14px;
+  background:var(--tint);
+  border-radius:999px;
+  color:var(--muted);
+}
+.tags a:hover{
+  background:var(--brand-700);
+  color:#fff;
+  text-decoration:none;
+}
+
+/* ===== ARTICLE NAV — รองรับทั้ง .artnav และ .prevnext ===== */
+.artnav,.prevnext{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  margin-top:34px;
+}
+.prevnext{margin-top:26px}
+.artnav a,.prevnext a{
+  padding:18px 20px;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  color:var(--ink);
+  background:var(--surface);
+}
+.artnav a:hover,.prevnext a:hover{
+  border-color:var(--link);
+  box-shadow:var(--shadow);
+  text-decoration:none;
+}
+.artnav small,.prevnext small{
+  display:block;
+  color:var(--muted);
+  font-size:.8rem;
+  margin-bottom:5px;
+}
+.artnav .next,.prevnext .nx{text-align:right}
+
+/* ===== FILTER BAR / ITA TOOLS ===== */
+.filterbar{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:14px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:20px;
+  margin-bottom:30px;
+}
+.filterbar label{
+  display:block;
+  font-size:.83rem;
+  font-weight:600;
+  margin-bottom:6px;
+  color:var(--muted);
+}
+.filterbar select,.filterbar input{
+  width:100%;
+  border:1px solid var(--line);
+  border-radius:var(--radius-sm);
+  padding:10px 13px;
+  background:var(--surface);
+}
+.resultbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:14px;
+  flex-wrap:wrap;
+  margin-bottom:20px;
+  font-size:.9rem;
+  color:var(--muted);
+}
+.resultbar b{color:var(--accent)}
+
+.ita-tools{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  align-items:center;
+  margin-bottom:24px;
+}
+.ita-tools select,.ita-tools input{
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:10px 18px;
+  background:var(--surface);
+  min-width:0;
+  max-width:100%;
+}
+.ita-tools .count{
+  margin-left:auto;
+  color:var(--muted);
+  font-size:.9rem;
+}
+
+/* ===== TABLES — รองรับ .tbl และ .itatbl ===== */
+.tbl-wrap{
+  overflow-x:auto;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  background:var(--surface);
+}
+.tbl{
+  width:100%;
+  border-collapse:collapse;
+  min-width:720px;
+  font-size:.94rem;
+}
+.tbl caption{
+  text-align:left;
+  padding:16px 20px;
+  font-family:var(--ff-head);
+  border-bottom:1px solid var(--line);
+}
+.tbl th,.tbl td{
+  padding:13px 18px;
+  border-bottom:1px solid var(--line);
+  text-align:left;
+  vertical-align:top;
+}
+.tbl thead th{
+  background:var(--brand-700);
+  color:#fff;
+  position:sticky;
+  top:0;
+  z-index:2;
+  font-weight:600;
+}
+.tbl tbody tr:hover{background:var(--tint)}
+.tbl .code{
+  font-family:var(--ff-head);
+  color:var(--accent);
+  font-weight:600;
+  white-space:nowrap;
+}
+
+.itatbl{
+  width:100%;
+  border-collapse:collapse;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  overflow:hidden;
+  font-size:.93rem;
+}
+.itatbl thead th{
+  background:var(--brand-500);
+  color:#fff;
+  text-align:left;
+  padding:14px 16px;
+  font-family:var(--ff-head);
+  font-weight:600;
+  position:sticky;
+  top:78px;
+  z-index:5;
+}
+.itatbl td{
+  padding:13px 16px;
+  border-top:1px solid var(--line);
+  vertical-align:top;
+}
+.itatbl tbody tr:hover{background:var(--tint)}
+.itatbl .c{
+  font-family:var(--ff-head);
+  color:var(--accent);
+  font-weight:600;
+  white-space:nowrap;
+}
+.itatbl .st{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  font-size:.82rem;
+  font-weight:600;
+  padding:4px 12px;
+  border-radius:999px;
+  white-space:nowrap;
+}
+
+/* ===== NOTE / DISCLAIMER (ข้อมูลรอตรวจสอบ/ยืนยันเพิ่มเติม) ===== */
+.note{
+  background:#FFF8E8;
+  border:1px solid #F0DCA0;
+  border-radius:var(--radius-sm);
+  padding:14px 18px;
+  font-size:.88rem;
+  line-height:1.75;
+  color:#6B5215;
+  margin:18px 0;
+}
+.note b{color:#8A6100}
+.note--src{
+  background:var(--tint);
+  border:1px solid var(--line);
+  color:var(--muted);
+}
+.note--src b{color:var(--accent)}
+.muted{color:var(--muted)}
+.srclist{margin:8px 0 0;padding-left:1.2em;font-size:.86rem;line-height:1.9}
+.srclist a{word-break:break-all}
+
+/* ===== STATUS ===== */
+.st{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:4px 12px;
+  border-radius:999px;
+  font-size:.8rem;
+  white-space:nowrap;
+}
+.st--ok{background:#E4F4EA;color:#1E7A45}
+.st--wait{background:#FFF3D9;color:#8A6100}
+.st--none{background:#F1F1F1;color:#5A5A5A}
+.st::before{
+  content:"";
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:currentColor;
+}
+
+/* Dark theme — ปรับสีพาสเทลของกล่องหมายเหตุ/สถานะให้ไม่เหลือเป็นแพทช์สีขาว/สว่างบนพื้นมืด
+   คงโทนความหมายเดิม (เหลืองเตือน/เขียวสำเร็จ/เทาเป็นกลาง) แต่เข้มขึ้นให้เข้ากับพื้นหลังมืด */
+html[data-theme="dark"] .note{background:#3A2F12;border-color:#5C4A1C;color:#E9D9A6}
+html[data-theme="dark"] .note b{color:#F0C86B}
+html[data-theme="dark"] .st--ok{background:#123A22;color:#7EE0A8}
+html[data-theme="dark"] .st--wait{background:#3A2F12;color:#F0C86B}
+html[data-theme="dark"] .st--none{background:#2A2A2A;color:#C9C9C9}
+
+/* ===== GROUP ROWS ===== */
+.grp-row td{
+  background:var(--tint);
+  font-family:var(--ff-head);
+  color:var(--accent);
+  font-weight:600;
+}
+.itagroup{
+  background:var(--tint);
+  font-family:var(--ff-head);
+  font-weight:600;
+  color:var(--accent);
+}
+
+/* ===== 404 — รองรับทั้ง .nf และ .err ===== */
+.nf,.err{
+  min-height:64vh;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  padding:60px 20px;
+}
+.err{padding:60px 0}
+.nf b,.err b{
+  display:block;
+  font-family:var(--ff-head);
+  font-size:clamp(5rem,18vw,10rem);
+  line-height:1;
+  color:var(--accent);
+  opacity:.17;
+}
+.nf h1,.err h1{margin:-24px 0 12px}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width:1024px){
+  .layout{grid-template-columns:1fr;gap:30px}
+  .side{position:static}
+  .itatbl thead th{position:static}
+}
+
+@media (max-width:768px){
+  .prevnext,.artnav{grid-template-columns:1fr}
+  .prevnext .nx,.artnav .next{text-align:left}
+
+  .itatbl,.itatbl thead,.itatbl tbody,.itatbl tr,.itatbl td{
+    display:block;
+    width:100%;
+  }
+  .itatbl thead{display:none}
+  .itatbl tr{
+    border-top:1px solid var(--line);
+    padding:8px 0;
+  }
+  .itatbl td{
+    border:0;
+    padding:7px 16px;
+    display:flex;
+    gap:12px;
+  }
+  .itatbl td::before{
+    content:attr(data-l);
+    font-weight:600;
+    color:var(--muted);
+    min-width:76px;
+    font-size:.84rem;
+  }
+}
+
+@media (max-width:600px){
+  .ita-tools .count{
+    margin-left:0;
+    width:100%;
+  }
+}
+
+@media print{
+  .side,.share,.artnav,.prevnext,.crumb,.ita-tools,.filterbar{
+    display:none!important;
+  }
+  .layout{display:block}
+  .art__body{font-size:12pt}
+  a[href^="http"]::after{
+    content:" (" attr(href) ")";
+    font-size:9pt;
+    color:#555;
+  }
+}
+
+
+/* =========================================================
+   ADMIN / CONTENT MANAGER
+   หน้าจัดการข้อมูลฝั่ง Frontend (pages/admin.html) — ยังไม่มีลิงก์เชื่อมจากหน้าเว็บหลักตามที่ระบุ
+   ใช้คลาสร่วมกับระบบเดิมมากที่สุด (.tabs / .tbl-wrap / .panel / .fld / .btn) เพื่อคงสไตล์เดียวกันทั้งเว็บไซต์
+   ========================================================= */
+.admin-tabs{margin-bottom:26px}
+.admin__panel[hidden]{display:none}
+.admin__toolbar{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+.admin__toolbar h2{margin:0 0 4px}
+.admin__actions{display:flex;gap:10px;flex-wrap:wrap}
+.admin__form{margin-top:24px;display:grid;gap:16px;max-width:760px}
+.admin__form[hidden]{display:none}
+.admin__form h3{margin:0;padding:0;border:0;font-size:1.1rem}
+.admin__badge{margin:0;font-size:.82rem;color:var(--muted)}
+.admin__grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.admin__foot{display:flex;gap:10px;align-items:center;margin-top:2px}
+.admin-row-actions{display:flex;gap:8px;flex-wrap:wrap}
+@media (max-width:640px){.admin__grid2{grid-template-columns:1fr}}
+
+/* ===== CSS เสริมสำหรับ Skeleton ===== */
+.sk__box,.sk__line{background:linear-gradient(90deg,var(--tint) 25%,var(--surface) 50%,var(--tint) 75%);background-size:200% 100%;animation:shim 1.3s linear infinite;border-radius:6px}
+.sk__box{aspect-ratio:16/10}
+.sk__line{display:block;height:13px;margin-bottom:10px}
+@keyframes shim{from{background-position:200% 0}to{background-position:-200% 0}}
+.state{grid-column:1/-1;text-align:center;padding:56px 20px;color:var(--muted)}
+.state--err p{margin:0 0 16px}
+@media (prefers-reduced-motion:reduce){.sk__box,.sk__line{animation:none}}
+
+

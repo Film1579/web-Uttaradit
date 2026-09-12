@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="th" data-base="../">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ITA — การเปิดเผยข้อมูลสาธารณะ (OIT) | จังหวัดอุตรดิตถ์</title>
+<meta name="description" content="ข้อมูลการเปิดเผยข้อมูลสาธารณะ (OIT) ข้อ O1–O43 ตามแบบวัด ITA ของจังหวัดอุตรดิตถ์">
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500;600;700&family=Sarabun:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/pages.css">
+<link rel="stylesheet" href="../css/responsive.css">
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#12484A">
+</head>
+<body>
+
+<section class="phead">
+  <div class="container">
+    <nav class="crumb" aria-label="เส้นทางนำทาง"><ol>
+      <li><a href="../index.html">หน้าแรก</a></li>
+      <li aria-current="page">ITA / ความโปร่งใส</li>
+    </ol></nav>
+    <h1>การเปิดเผยข้อมูลสาธารณะ (OIT)</h1>
+    <p>แบบวัดการเปิดเผยข้อมูลสาธารณะ ข้อ O1–O43 ตามกรอบการประเมินคุณธรรมและความโปร่งใสในการดำเนินงานของหน่วยงานภาครัฐ (ITA) — ข้อมูลคะแนนล่าสุดที่ยืนยันได้: ปีงบประมาณ พ.ศ. 2567</p>
+  </div>
+</section>
+
+<main id="main" class="container" style="padding:clamp(40px,5vw,68px) 0">
+
+  <ul class="svc" id="scoreCards" style="margin-bottom:44px" aria-label="ผลคะแนน ITA ย้อนหลัง"></ul>
+
+  <div class="ita-tools">
+    <label class="sr-only" for="itaQ">ค้นหาหัวข้อ OIT</label>
+    <input id="itaQ" type="search" placeholder="ค้นหาหัวข้อ หรือรหัส O…">
+    <label class="sr-only" for="itaGrp">กรองตามตัวชี้วัด</label>
+    <select id="itaGrp"><option value="">ทุกตัวชี้วัด</option></select>
+    <label class="sr-only" for="itaSt">กรองตามสถานะ</label>
+    <select id="itaSt">
+      <option value="">ทุกสถานะ</option>
+      <option value="pending">รอเชื่อมโยงข้อมูลจริง</option>
+    </select>
+    <p class="count" id="itaCount" aria-live="polite"></p>
+  </div>
+
+  <p class="note" style="margin-top:0">
+    <b>หมายเหตุความโปร่งใส:</b> โครงหัวข้อ O1–O43 ด้านล่างจัดทำตามกรอบการประเมินมาตรฐานของสำนักงาน ป.ป.ช. ที่ใช้ทั่วประเทศ
+    แต่ลิงก์เอกสารและสถานะการเผยแพร่รายข้อของจังหวัดอุตรดิตถ์ยังไม่ได้รับการยืนยันในการค้นคว้าครั้งนี้ จึงแสดงสถานะ
+    "รอเชื่อมโยงข้อมูลจริง" ไว้ทุกข้อ จนกว่าจะเชื่อมต่อกับหน้าเว็บไซต์ ITA ที่เผยแพร่จริงของจังหวัด นอกจากนี้ ITA ระดับจังหวัด
+    (ที่ทำการปกครองจังหวัด/สำนักงานจังหวัด) แตกต่างจาก ITA ของหน่วยงานราชการส่วนภูมิภาคแต่ละแห่งในจังหวัด ซึ่งประเมินแยกกัน
+  </p>
+
+  <div class="tbl-wrap">
+    <table class="tbl" id="itaTable">
+      <caption>ตารางข้อมูลการเปิดเผยข้อมูลสาธารณะ (Open Data Integrity and Transparency Assessment)</caption>
+      <thead><tr>
+        <th scope="col" style="width:90px">รหัส</th>
+        <th scope="col">ข้อมูลที่ต้องเปิดเผย</th>
+        <th scope="col" style="width:170px">สถานะ</th>
+        <th scope="col" style="width:120px">ลิงก์</th>
+      </tr></thead>
+      <tbody id="itaBody"></tbody>
+    </table>
+  </div>
+  <p class="empty" id="itaEmpty" hidden>ไม่พบรายการที่ตรงกับเงื่อนไข</p>
+
+</main>
+
+<script src="../js/img-fallback.js"></script>
+<script src="../js/ui.js"></script>
+<script src="../js/data.js"></script>
+<script src="../js/shell.js"></script>
+<script src="../js/page-ita.js"></script>
+</body>
+</html>
+
+

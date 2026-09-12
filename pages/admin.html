@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="th" data-base="../">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>จัดการข้อมูลเว็บไซต์ | จังหวัดอุตรดิตถ์</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="หน้าจัดการข้อมูลเว็บไซต์ฝั่ง Frontend สำหรับข่าวสารประจำจังหวัด ข้อมูลท่องเที่ยว และของดีจังหวัด">
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500;600;700&family=Sarabun:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/pages.css">
+<link rel="stylesheet" href="../css/responsive.css">
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#12484A">
+</head>
+<body>
+
+<section class="phead">
+  <div class="container">
+    <nav class="crumb" aria-label="เส้นทางนำทาง"><ol>
+      <li><a href="../index.html">หน้าแรก</a></li>
+      <li aria-current="page">จัดการข้อมูลเว็บไซต์</li>
+    </ol></nav>
+    <h1>จัดการข้อมูลเว็บไซต์ <span style="font-weight:400;font-size:.6em;opacity:.85">Content Manager</span></h1>
+    <p>เพิ่ม แก้ไข และลบข่าวสารประจำจังหวัด ข้อมูลท่องเที่ยว และของดีจังหวัด — หน้านี้เป็นเครื่องมือฝั่ง Frontend เท่านั้น
+      ข้อมูลจะถูกบันทึกไว้ในเบราว์เซอร์นี้ (localStorage) ยังไม่เชื่อมต่อฐานข้อมูล/เซิร์ฟเวอร์จริง และยังไม่มีลิงก์เข้าถึงจากหน้าเว็บหลัก</p>
+  </div>
+</section>
+
+<main id="main" class="container" style="padding:clamp(40px,5vw,68px) 0">
+
+  <p class="note" role="note">
+    <b>หมายเหตุการใช้งาน:</b> การเปลี่ยนแปลงในหน้านี้จะถูกเก็บไว้ในเบราว์เซอร์ของอุปกรณ์นี้เท่านั้น (localStorage) —
+    หากต้องการนำข้อมูลไปใช้จริงบนเว็บไซต์ ต้องส่งต่อให้ผู้ดูแลระบบนำเข้าสู่ระบบหลังบ้าน (Backend) อีกครั้ง
+  </p>
+
+  <div class="tabs admin-tabs" role="tablist" aria-label="ประเภทข้อมูลที่จัดการ" id="adminTabs">
+    <button type="button" role="tab" aria-selected="true"  aria-controls="panel-news"     id="tab-news"     data-tab="news">ข่าวสารประจำจังหวัด</button>
+    <button type="button" role="tab" aria-selected="false" aria-controls="panel-travel"   id="tab-travel"   data-tab="travel">ข้อมูลท่องเที่ยว</button>
+    <button type="button" role="tab" aria-selected="false" aria-controls="panel-products" id="tab-products" data-tab="products">ของดีจังหวัด</button>
+  </div>
+
+  <!-- ========== NEWS PANEL ========== -->
+  <section class="admin__panel is-active" id="panel-news" role="tabpanel" aria-labelledby="tab-news">
+    <div class="admin__toolbar">
+      <div>
+        <h2 class="sec__title" style="margin:0">ข่าวสารประจำจังหวัด</h2>
+        <p class="sec__desc">ทั้งหมด <b id="adminCount-news">0</b> รายการ</p>
+      </div>
+      <div class="admin__actions">
+        <button type="button" class="btn btn--brand btn--sm" data-add="news">+ เพิ่มข่าวใหม่</button>
+        <button type="button" class="btn btn--ghost btn--sm" data-reset="news">คืนค่าเริ่มต้น</button>
+      </div>
+    </div>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <caption class="sr-only">รายการข่าวสารประจำจังหวัด</caption>
+        <thead><tr><th style="width:120px">วันที่</th><th style="width:160px">หมวด</th><th>หัวข้อข่าว</th><th style="width:160px">การจัดการ</th></tr></thead>
+        <tbody id="adminBody-news"></tbody>
+      </table>
+    </div>
+
+    <form class="panel admin__form" id="form-news" data-type="news" hidden novalidate>
+      <h3 id="formTitle-news">เพิ่มข่าวใหม่</h3>
+      <p class="admin__badge">ฟิลด์ที่มี <span aria-hidden="true">*</span> จำเป็นต้องกรอก</p>
+      <input type="hidden" name="id">
+      <div class="admin__grid2">
+        <div class="fld"><label for="news-date">วันที่ข่าว <span aria-hidden="true">*</span></label>
+          <input id="news-date" name="date" type="date" required></div>
+        <div class="fld"><label for="news-cat">หมวดข่าว <span aria-hidden="true">*</span></label>
+          <select id="news-cat" name="cat" required></select></div>
+      </div>
+      <div class="fld"><label for="news-title">หัวข้อข่าว <span aria-hidden="true">*</span></label>
+        <input id="news-title" name="title" required></div>
+      <div class="fld"><label for="news-ex">สรุปย่อ <span aria-hidden="true">*</span></label>
+        <textarea id="news-ex" name="ex" rows="3" required></textarea></div>
+      <div class="admin__grid2">
+        <div class="fld"><label for="news-src">แหล่งข่าว</label>
+          <input id="news-src" name="src" placeholder="เช่น สำนักงานประชาสัมพันธ์จังหวัดอุตรดิตถ์"></div>
+        <div class="fld"><label for="news-srcUrl">ลิงก์แหล่งข่าว</label>
+          <input id="news-srcUrl" name="srcUrl" type="url" placeholder="https://..."></div>
+      </div>
+      <div class="fld"><label for="news-img">รูปภาพประกอบ (ไฟล์/URL)</label>
+        <input id="news-img" name="img" placeholder="assets/img/n1.jpg"></div>
+      <p class="fld__err" id="err-news" role="alert" hidden></p>
+      <div class="admin__foot">
+        <button type="submit" class="btn btn--brand">บันทึก</button>
+        <button type="button" class="btn btn--ghost" data-cancel-form="news">ยกเลิก</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- ========== TRAVEL PANEL ========== -->
+  <section class="admin__panel" id="panel-travel" role="tabpanel" aria-labelledby="tab-travel" hidden>
+    <div class="admin__toolbar">
+      <div>
+        <h2 class="sec__title" style="margin:0">ข้อมูลท่องเที่ยว</h2>
+        <p class="sec__desc">ทั้งหมด <b id="adminCount-travel">0</b> รายการ</p>
+      </div>
+      <div class="admin__actions">
+        <button type="button" class="btn btn--brand btn--sm" data-add="travel">+ เพิ่มสถานที่ใหม่</button>
+        <button type="button" class="btn btn--ghost btn--sm" data-reset="travel">คืนค่าเริ่มต้น</button>
+      </div>
+    </div>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <caption class="sr-only">รายการสถานที่ท่องเที่ยว</caption>
+        <thead><tr><th>ชื่อสถานที่</th><th style="width:150px">หมวด</th><th style="width:160px">การจัดการ</th></tr></thead>
+        <tbody id="adminBody-travel"></tbody>
+      </table>
+    </div>
+
+    <form class="panel admin__form" id="form-travel" data-type="travel" hidden novalidate>
+      <h3 id="formTitle-travel">เพิ่มสถานที่ท่องเที่ยวใหม่</h3>
+      <p class="admin__badge">ฟิลด์ที่มี <span aria-hidden="true">*</span> จำเป็นต้องกรอก</p>
+      <input type="hidden" name="id">
+      <div class="fld"><label for="travel-t">ชื่อสถานที่ <span aria-hidden="true">*</span></label>
+        <input id="travel-t" name="t" required></div>
+      <div class="fld"><label for="travel-s">คำอธิบาย/ที่ตั้งโดยย่อ <span aria-hidden="true">*</span></label>
+        <textarea id="travel-s" name="s" rows="3" required></textarea></div>
+      <div class="admin__grid2">
+        <div class="fld"><label for="travel-tag">หมวดหมู่ <span aria-hidden="true">*</span></label>
+          <input id="travel-tag" name="tag" list="travelTagList" required placeholder="เช่น ธรรมชาติ">
+          <datalist id="travelTagList">
+            <option value="ธรรมชาติ"><option value="ศาสนสถาน"><option value="ประวัติศาสตร์"><option value="วัฒนธรรม">
+          </datalist></div>
+        <div class="fld"><label for="travel-img">รูปภาพประกอบ (ไฟล์/URL)</label>
+          <input id="travel-img" name="img" placeholder="assets/img/t1.jpg"></div>
+      </div>
+      <p class="fld__err" id="err-travel" role="alert" hidden></p>
+      <div class="admin__foot">
+        <button type="submit" class="btn btn--brand">บันทึก</button>
+        <button type="button" class="btn btn--ghost" data-cancel-form="travel">ยกเลิก</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- ========== PRODUCTS PANEL (ของดีจังหวัด) ========== -->
+  <section class="admin__panel" id="panel-products" role="tabpanel" aria-labelledby="tab-products" hidden>
+    <div class="admin__toolbar">
+      <div>
+        <h2 class="sec__title" style="margin:0">ของดีจังหวัด <span>GI / OTOP</span></h2>
+        <p class="sec__desc">ทั้งหมด <b id="adminCount-products">0</b> รายการ</p>
+      </div>
+      <div class="admin__actions">
+        <button type="button" class="btn btn--brand btn--sm" data-add="products">+ เพิ่มของดีใหม่</button>
+        <button type="button" class="btn btn--ghost btn--sm" data-reset="products">คืนค่าเริ่มต้น</button>
+      </div>
+    </div>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <caption class="sr-only">รายการของดีจังหวัด (สินค้า GI/OTOP)</caption>
+        <thead><tr><th style="width:60px">ไอคอน</th><th>ชื่อสินค้า</th><th style="width:150px">ประเภท</th><th style="width:160px">การจัดการ</th></tr></thead>
+        <tbody id="adminBody-products"></tbody>
+      </table>
+    </div>
+
+    <form class="panel admin__form" id="form-products" data-type="products" hidden novalidate>
+      <h3 id="formTitle-products">เพิ่มของดีจังหวัดใหม่</h3>
+      <p class="admin__badge">ฟิลด์ที่มี <span aria-hidden="true">*</span> จำเป็นต้องกรอก</p>
+      <input type="hidden" name="id">
+      <div class="admin__grid2">
+        <div class="fld"><label for="prod-t">ชื่อสินค้า <span aria-hidden="true">*</span></label>
+          <input id="prod-t" name="t" required></div>
+        <div class="fld"><label for="prod-ic">ไอคอน (อิโมจิ)</label>
+          <input id="prod-ic" name="ic" maxlength="4" placeholder="🍈"></div>
+      </div>
+      <div class="admin__grid2">
+        <div class="fld"><label for="prod-type">ประเภท <span aria-hidden="true">*</span></label>
+          <select id="prod-type" name="type" required>
+            <option value="gi">สินค้า GI (สิ่งบ่งชี้ทางภูมิศาสตร์)</option>
+            <option value="otop">สินค้า OTOP</option>
+          </select></div>
+        <div class="fld"><label for="prod-tag">ป้ายกำกับที่แสดงผล</label>
+          <input id="prod-tag" name="tag" placeholder="เช่น สินค้า GI"></div>
+      </div>
+      <div class="fld"><label for="prod-s">คำอธิบาย <span aria-hidden="true">*</span></label>
+        <textarea id="prod-s" name="s" rows="3" required></textarea></div>
+      <p class="fld__err" id="err-products" role="alert" hidden></p>
+      <div class="admin__foot">
+        <button type="submit" class="btn btn--brand">บันทึก</button>
+        <button type="button" class="btn btn--ghost" data-cancel-form="products">ยกเลิก</button>
+      </div>
+    </form>
+  </section>
+
+</main>
+
+<script src="../js/img-fallback.js"></script>
+<script src="../js/ui.js"></script>
+<script src="../js/config.js"></script>
+<script src="../js/shell.js"></script>
+<script src="../js/page-admin.js"></script>
+</body>
+</html>

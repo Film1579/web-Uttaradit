@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>จังหวัดอุตรดิตถ์ | เหล็กน้ำพี้ลือเลื่อง เมืองลางสาดหวาน บ้านพระยาพิชัยดาบหัก ถิ่นสักใหญ่ของโลก</title>
+<meta name="description" content="เว็บไซต์ทางการจังหวัดอุตรดิตถ์ ข่าวสาร บริการประชาชน (e-Service) ข้อมูลหน่วยงาน แหล่งท่องเที่ยว และข้อมูลความโปร่งใส ITA">
+<meta property="og:title" content="จังหวัดอุตรดิตถ์">
+<meta property="og:image" content="assets/img/og.jpg">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#12484A">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500;600;700&family=Sarabun:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/preloader.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/responsive.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"GovernmentOrganization",
+"name":"จังหวัดอุตรดิตถ์","url":"https://www.uttaradit.go.th",
+"address":{"@type":"PostalAddress","streetAddress":"ศาลากลางจังหวัดอุตรดิตถ์ ถนนประชานิมิตร ต.ท่าอิฐ อ.เมืองอุตรดิตถ์","addressRegion":"อุตรดิตถ์","postalCode":"53000","addressCountry":"TH"},
+"telephone":"+66-55-411-977","email":"uttaradit@moi.go.th"}
+</script>
+</head>
+<body class="is-preloading">
+
+<!-- ========== PRELOADER : CINEMATIC FOG ========== -->
+<div id="preloader" class="pl" role="dialog" aria-modal="true" aria-label="กำลังโหลดเว็บไซต์จังหวัดอุตรดิตถ์" data-state="loading">
+  <canvas id="fogCanvas" class="pl__fog" aria-hidden="true"></canvas>
+  <div class="pl__vignette" aria-hidden="true"></div>
+  <div class="pl__stage">
+    <div class="pl__layer pl__layer--back" aria-hidden="true"></div>
+    <div class="pl__layer pl__layer--mid"  aria-hidden="true"></div>
+    <div class="pl__layer pl__layer--front" aria-hidden="true"></div>
+    <div class="pl__content">
+      <img class="pl__seal" src="assets/img/logo.png" alt="" width="96" height="96">
+      <h1 class="pl__title"><span>อุ</span><span>ต</span><span>ร</span><span>ดิ</span><span>ต</span><span>ถ์</span></h1>
+      <p class="pl__sub">ถิ่นสักใหญ่ของโลก · เมืองลับแล</p>
+      <div class="pl__bar"><i id="plBar"></i></div>
+      <p class="pl__pct" aria-live="polite"><span id="plPct">0</span>%</p>
+      <button id="plSkip" class="pl__skip" type="button">ข้ามการแนะนำ <kbd>Esc</kbd></button>
+    </div>
+  </div>
+</div>
+
+<a class="skip-link" href="#main">ข้ามไปยังเนื้อหาหลัก</a>
+
+<!-- ========== TOP BAR ========== -->
+<div class="topbar">
+  <div class="container topbar__in">
+    <p class="topbar__txt">ศูนย์ดำรงธรรมจังหวัดอุตรดิตถ์ โทร. <a href="tel:1567">1567</a></p>
+    <div class="a11y" role="group" aria-label="เครื่องมือช่วยการเข้าถึง">
+      <button type="button" data-font="dec" aria-label="ลดขนาดตัวอักษร">ก-</button>
+      <button type="button" data-font="reset" aria-label="ขนาดตัวอักษรปกติ">ก</button>
+      <button type="button" data-font="inc" aria-label="เพิ่มขนาดตัวอักษร">ก+</button>
+      <button type="button" id="btnTheme" aria-pressed="false" aria-label="สลับธีมเป็นโหมดมืด">🌙</button>
+      <button type="button" id="btnContrast" aria-pressed="false" aria-label="สลับโหมดความต่างสีสูง">◐</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== HEADER ========== -->
+<header class="hd" id="header">
+  <div class="container hd__in">
+    <a class="hd__brand" href="/">
+      <img src="assets/img/logo.png" alt="ตราประจำจังหวัดอุตรดิตถ์" width="52" height="52">
+      <span><b>จังหวัดอุตรดิตถ์</b><small>Uttaradit Province</small></span>
+    </a>
+    <button class="hd__burger" id="burger" aria-expanded="false" aria-controls="nav" aria-label="เปิดเมนู">
+      <i></i><i></i><i></i>
+    </button>
+    <nav class="nav" id="nav" aria-label="เมนูหลัก">
+      <ul class="nav__list">
+        <li><a href="#home">หน้าแรก</a></li>
+        <li class="has-sub">
+          <a href="#about" aria-expanded="false">แนะนำจังหวัด <span aria-hidden="true">▾</span></a>
+          <ul class="sub">
+            <li><a href="#about">ประวัติความเป็นมา</a></li>
+            <li><a href="#about">ตราสัญลักษณ์ & คำขวัญ</a></li>
+            <li><a href="#about">ผู้บริหารจังหวัด</a></li>
+            <li><a href="#about">แผนพัฒนาจังหวัด</a></li>
+          </ul>
+        </li>
+        <li class="has-sub">
+          <a href="#agencies" aria-expanded="false">หน่วยงาน <span aria-hidden="true">▾</span></a>
+          <ul class="sub">
+            <li><a href="#agencies">ส่วนราชการภูมิภาค</a></li>
+            <li><a href="#agencies">องค์กรปกครองส่วนท้องถิ่น</a></li>
+            <li><a href="#agencies">อำเภอทั้ง 9 อำเภอ</a></li>
+          </ul>
+        </li>
+        <li><a href="#services">บริการประชาชน</a></li>
+        <li><a href="#news">ข่าวสาร</a></li>
+        <li><a href="#travel">ท่องเที่ยว &amp; ของดี</a></li>
+        <li><a href="#ita">ITA</a></li>
+        <li><a href="#contact">ติดต่อเรา</a></li>
+      </ul>
+      <form class="nav__search" role="search" id="siteSearch">
+        <label class="sr-only" for="q">ค้นหาในเว็บไซต์</label>
+        <input id="q" type="search" placeholder="ค้นหา…" autocomplete="off">
+        <button type="submit" aria-label="ค้นหา">🔍</button>
+      </form>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ========== HERO ========== -->
+<section class="hero" id="home" aria-label="ภาพแลนด์มาร์คจังหวัดอุตรดิตถ์">
+  <div class="hero__slides" id="heroSlides"></div>
+  <div class="hero__overlay" aria-hidden="true"></div>
+  <div class="container hero__body">
+    <p class="hero__kicker" data-reveal>เว็บไซต์ทางการ · Official Website</p>
+    <h2 class="hero__title" data-reveal>จังหวัดอุตรดิตถ์</h2>
+    <p class="hero__quote" data-reveal>“เหล็กน้ำพี้ลือเลื่อง เมืองลางสาดหวาน<br>บ้านพระยาพิชัยดาบหัก ถิ่นสักใหญ่ของโลก”</p>
+    <div class="hero__cta" data-reveal>
+      <a class="btn btn--gold" href="#services">บริการประชาชน</a>
+      <a class="btn btn--ghost" href="#travel">เที่ยวอุตรดิตถ์</a>
+    </div>
+  </div>
+  <ul class="hero__stats" id="heroStats" aria-label="ข้อมูลจังหวัดโดยสรุป"></ul>
+  <div class="hero__dots" id="heroDots" role="tablist" aria-label="เลือกภาพ"></div>
+</section>
+
+<!-- ========== E-SERVICE ========== -->
+<section class="sec sec--tint" id="services" aria-labelledby="h-svc">
+  <div class="container">
+    <header class="sec__head">
+      <h2 id="h-svc" class="sec__title">บริการประชาชน <span>Citizen e-Service</span></h2>
+      <p class="sec__desc">บริการออนไลน์ที่ใช้บ่อย เข้าถึงได้ภายในคลิกเดียว</p>
+    </header>
+    <ul class="svc" id="svcGrid"></ul>
+  </div>
+</section>
+
+<!-- ========== NEWS ========== -->
+<section class="sec" id="news" aria-labelledby="h-news">
+  <div class="container">
+    <header class="sec__head sec__head--row">
+      <div>
+        <h2 id="h-news" class="sec__title">ข่าวสารประจำจังหวัด <span>News &amp; Announcements</span></h2>
+        <p class="sec__desc">ข่าวประชาสัมพันธ์และกิจกรรมของจังหวัด อัปเดตล่าสุด</p>
+      </div>
+      <form class="news__search" role="search" onsubmit="return false">
+        <label class="sr-only" for="newsQ">ค้นหาข่าว</label>
+        <input id="newsQ" type="search" placeholder="ค้นหาหัวข้อข่าว…">
+      </form>
+    </header>
+
+    <div class="tabs" role="tablist" aria-label="หมวดหมู่ข่าว" id="newsTabs"></div>
+    <div id="newsPanel" role="tabpanel" tabindex="0" aria-live="polite">
+      <ul class="cards" id="newsGrid"></ul>
+      <p class="empty" id="newsEmpty" hidden>ไม่พบข่าวที่ตรงกับเงื่อนไข</p>
+    </div>
+    <nav class="pager" id="newsPager" aria-label="แบ่งหน้าข่าว"></nav>
+    <div style="text-align:center;margin-top:22px">
+      <a class="btn btn--ghost" href="pages/news.html">ดูข่าวสารทั้งหมด →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== ITA / TRANSPARENCY ========== -->
+<section class="sec sec--dark" id="ita" aria-labelledby="h-ita">
+  <div class="container">
+    <header class="sec__head">
+      <h2 id="h-ita" class="sec__title">ความโปร่งใส &amp; ITA <span>Integrity &amp; Transparency Assessment</span></h2>
+      <p class="sec__desc">ข้อมูลเปิดเผยตามแบบวัด OIT — ผลคะแนนล่าสุดที่ยืนยันได้: ปีงบประมาณ พ.ศ. 2567</p>
+    </header>
+    <div class="ita">
+      <ul class="ita__list" id="itaList"></ul>
+      <aside class="ita__score">
+        <p class="ita__label">ผลประเมิน ITA ปีงบประมาณ พ.ศ. 2567</p>
+        <p class="ita__num"><span data-count="98.82">0</span><small>คะแนน</small></p>
+        <p class="ita__grade">ระดับผลการประเมิน : <b>ผ่านดีเยี่ยม</b></p>
+        <a class="btn btn--gold" href="pages/ita.html">ดูรายงานฉบับเต็ม</a>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TRAVEL ========== -->
+<section class="sec" id="travel" aria-labelledby="h-tr">
+  <div class="container">
+    <header class="sec__head">
+      <h2 id="h-tr" class="sec__title">ท่องเที่ยวและของดีจังหวัด <span>Travel &amp; Local Products</span></h2>
+      <p class="sec__desc">ธรรมชาติ ศาสนสถาน และสินค้า GI/OTOP ขึ้นชื่อของอุตรดิตถ์</p>
+    </header>
+    <ul class="cards cards--travel" id="travelGrid"></ul>
+    <div style="text-align:center;margin-top:22px">
+      <a class="btn btn--ghost" href="pages/travel.html">ดูสถานที่ท่องเที่ยวทั้งหมด →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== AGENCIES ========== -->
+<section class="sec sec--tint" id="agencies" aria-labelledby="h-ag">
+  <div class="container">
+    <header class="sec__head">
+      <h2 id="h-ag" class="sec__title">หน่วยงานในจังหวัด <span>Agencies &amp; Districts</span></h2>
+    </header>
+    <ul class="chips" id="agencyChips"></ul>
+  </div>
+</section>
+
+<!-- ========== ABOUT ========== -->
+<section class="sec" id="about" aria-labelledby="h-ab">
+  <div class="container about">
+    <div class="about__txt">
+      <h2 id="h-ab" class="sec__title">แนะนำจังหวัดอุตรดิตถ์ <span>About Uttaradit</span></h2>
+      <p>อุตรดิตถ์ตั้งอยู่ภาคเหนือตอนล่างของประเทศไทย เดิมชื่อ “บางโพท่าอิฐ” ยกฐานะเป็นเมืองอุตรดิตถ์ในสมัยรัชกาลที่ 5 เมื่อ พ.ศ. 2430 และยกฐานะเป็นจังหวัดใน พ.ศ. 2476 มีแม่น้ำน่านและเขื่อนสิริกิติ์เป็นแหล่งน้ำสำคัญ ลักษณะภูมิประเทศส่วนใหญ่เป็นเขตภูเขาและที่สูง (ประมาณร้อยละ 60) ส่วนที่เหลือเป็นที่ราบลุ่มแม่น้ำน่านและที่ราบเชิงเขา</p>
+      <p>เป็นบ้านเกิดของ <b>พระยาพิชัยดาบหัก</b> วีรบุรุษทหารเอกสมเด็จพระเจ้าตากสินมหาราช และเป็นถิ่นกำเนิดของ <b>เหล็กน้ำพี้</b> ลางสาด–ลองกอง และไม้สักที่ใหญ่ที่สุดในโลก</p>
+      <ul class="about__facts" id="aboutFacts"></ul>
+      <p style="margin-top:18px"><a class="btn btn--brand btn--sm" href="pages/about.html">อ่านประวัติและข้อมูลจังหวัดฉบับเต็ม →</a></p>
+    </div>
+    <figure class="about__fig">
+      <div class="about__frame">
+        <img src="assets/img/hero-2.jpg" alt="ทิวทัศน์เขื่อนสิริกิติ์ จังหวัดอุตรดิตถ์" loading="lazy" width="640" height="480">
+        <figcaption class="about__caption">เขื่อนสิริกิติ์ <span>อำเภอท่าปลา</span></figcaption>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<!-- ========== CONTACT ========== -->
+<section class="sec sec--tint" id="contact" aria-labelledby="h-ct">
+  <div class="container contact">
+    <div>
+      <h2 id="h-ct" class="sec__title">ติดต่อเรา <span>Contact Us</span></h2>
+      <address class="contact__info">
+        <p><b>สำนักงานจังหวัดอุตรดิตถ์</b><br>ชั้น 4 ศาลากลางจังหวัดอุตรดิตถ์ ถนนประชานิมิตร<br>ต.ท่าอิฐ อ.เมืองอุตรดิตถ์ จ.อุตรดิตถ์ 53000</p>
+        <p>โทรศัพท์ <a href="tel:055411977">0 5541 1977</a> · โทรสาร 0 5541 1003</p>
+        <p>อีเมล <a href="mailto:uttaradit@moi.go.th">uttaradit@moi.go.th</a></p>
+      </address>
+      <p><a class="btn btn--gold btn--sm" href="pages/contact.html">แบบฟอร์มติดต่อฉบับเต็ม / แจ้งเรื่องร้องเรียน →</a></p>
+    </div>
+    <form class="contact__form" id="ctForm" novalidate>
+      <div class="fld"><label for="cName">ชื่อ-นามสกุล <span aria-hidden="true">*</span></label><input id="cName" name="name" required></div>
+      <div class="fld"><label for="cMail">อีเมล <span aria-hidden="true">*</span></label><input id="cMail" name="email" type="email" required></div>
+      <div class="fld"><label for="cMsg">ข้อความ <span aria-hidden="true">*</span></label><textarea id="cMsg" name="message" rows="4" required></textarea></div>
+      <p class="fld__err" id="ctErr" role="alert" hidden></p>
+      <button class="btn btn--brand" type="submit">ส่งข้อความ</button>
+      <p class="ok" id="ctOk" role="status" hidden>ส่งข้อความเรียบร้อยแล้ว ขอบคุณครับ/ค่ะ</p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<!-- ========== FOOTER ========== -->
+<footer class="ft">
+  <div class="container ft__grid">
+    <div>
+      <img src="assets/img/logo.png" alt="" width="56" height="56">
+      <p><b>จังหวัดอุตรดิตถ์</b><br>ศาลากลางจังหวัดอุตรดิตถ์ ถนนประชานิมิตร<br>ต.ท่าอิฐ อ.เมืองอุตรดิตถ์ 53000</p>
+    </div>
+    <nav aria-label="ลิงก์ส่วนท้าย 1"><h3>บริการ</h3><ul>
+      <li><a href="#services">e-Service</a></li><li><a href="#services">ดาวน์โหลดแบบฟอร์ม</a></li>
+      <li><a href="#services">คู่มือประชาชน</a></li><li><a href="#services">ร้องเรียน/ร้องทุกข์</a></li></ul></nav>
+    <nav aria-label="ลิงก์ส่วนท้าย 2"><h3>ข้อมูลองค์กร</h3><ul>
+      <li><a href="#about">เกี่ยวกับจังหวัด</a></li><li><a href="#ita">ITA / OIT</a></li>
+      <li><a href="#agencies">หน่วยงานในสังกัด</a></li><li><a href="#contact">แผนผังเว็บไซต์</a></li></ul></nav>
+    <nav aria-label="ลิงก์ส่วนท้าย 3"><h3>นโยบาย</h3><ul>
+      <li><a href="pages/policy.html#pdpa">นโยบายคุ้มครองข้อมูลส่วนบุคคล (PDPA)</a></li><li><a href="pages/policy.html#cookie">นโยบายคุกกี้</a></li>
+      <li><a href="pages/policy.html#website">นโยบายเว็บไซต์</a></li><li><a href="pages/policy.html#security">นโยบายความมั่นคงปลอดภัย</a></li></ul></nav>
+  </div>
+  <div class="ft__bar"><div class="container">
+    <p>© 2569 จังหวัดอุตรดิตถ์ — สงวนลิขสิทธิ์</p>
+    <p>พัฒนาตามมาตรฐานเว็บไซต์ภาครัฐ v2.0 &amp; WCAG 2.1 Level AA</p>
+  </div></div>
+</footer>
+
+<button id="toTop" class="totop" aria-label="กลับขึ้นด้านบน" hidden>↑</button>
+
+<div class="cookie" id="cookie" role="region" aria-label="แจ้งเตือนคุกกี้" hidden>
+  <p>เว็บไซต์นี้ใช้คุกกี้เพื่อพัฒนาประสบการณ์การใช้งาน</p>
+  <button class="btn btn--gold btn--sm" id="cookieOk" type="button">ยอมรับ</button>
+</div>
+
+<script src="js/img-fallback.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/config.js"></script>
+<script src="js/fog.js"></script>
+<script src="js/preloader.js"></script>
+<script src="js/main.js"></script>
+<script>
+if ("serviceWorker" in navigator && location.protocol === "https:") {
+  addEventListener("load", () => navigator.serviceWorker.register("/sw.js").catch(() => {}));
+}
+</script>
+</body>
+</html>
+
+

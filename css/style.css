@@ -1,0 +1,323 @@
+/* ===== 1. TOKENS ===== */
+:root{
+  --brand-900:#0B2A2B; --brand-700:#12484A; --brand-500:#1E6F70; --brand-300:#57A3A0;
+  --gold-500:#C79B3B; --gold-300:#E4C378; --steel-500:#5A6B78;
+  --ink:#141A1A; --muted:#5A6560; --line:#E2E8E6; --bg:#FFFFFF; --tint:#F4F8F7;
+  --surface:#FFFFFF; --link:var(--brand-500); --accent:var(--brand-700);
+  --radius:14px; --radius-sm:8px; --shadow:0 6px 24px rgba(11,42,43,.10);
+  --shadow-lg:0 18px 46px rgba(11,42,43,.18);
+  --wrap:1200px; --gap:24px; --font-base:16px;
+  --ff-head:"Kanit",system-ui,sans-serif; --ff-body:"Sarabun",system-ui,sans-serif;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+/* Theme: Light/Dark — ระบบแยกต่างหากจาก High Contrast ด้านล่าง
+   ครอบคลุมพื้นหลัง/ตัวอักษร/เส้นขอบ/พื้นผิวการ์ด-อินพุต ทุกจุดที่เคย hard-code สีขาวไว้
+   (header/footer ยังคงใช้ brand-900 เป็นพื้นหลังเข้มโดยตั้งใจในทั้งสองธีม เพราะเป็นสีประจำจังหวัด) */
+html[data-theme="dark"]{
+  --bg:#0B1615; --surface:#132524; --tint:#1B302E;
+  --ink:#EAF2F1; --muted:#9FB4B1; --line:#28433F;
+  --link:#7FD8D6; --accent:#7FD8D6;
+  --shadow:0 6px 24px rgba(0,0,0,.45); --shadow-lg:0 18px 46px rgba(0,0,0,.6);
+}
+/* High Contrast — ระบบที่ 3 แยกอิสระจาก Light/Dark ด้านบนโดยสิ้นเชิง (คนละแอตทริบิวต์ data-contrast)
+   ใช้ร่วมกับ Light หรือ Dark ก็ได้ หน้าที่ของโหมดนี้คือ "เพิ่มความต่างของสี" ให้ทุกจุดผ่านเกณฑ์ WCAG AA/AAA
+   โดยเฉพาะ: ตัวอักษร/พื้นหลัง เส้นขอบที่มองเห็นชัดขึ้น ปุ่ม/ป้ายที่มีข้อความคมชัดขึ้น และวง focus ที่หนาและตัดกับพื้นชัดเจน
+   จึงไม่ใช่แค่การสลับสีเข้ม-อ่อนเหมือน dark mode แต่เป็นการบังคับค่าความต่างสี (contrast ratio) ให้สูงสุด */
+html[data-contrast="high"]{
+  --ink:#000;--muted:#1a1a1a;--tint:#fff;--line:#000;--surface:#fff;--bg:#fff;
+  --brand-700:#00302f;--brand-500:#00302f;--gold-500:#7a5a00;--gold-300:#FFD873;
+  --link:#00302f;--accent:#00302f;
+}
+html[data-theme="dark"][data-contrast="high"]{
+  --ink:#fff;--muted:#f2f2f2;--tint:#000;--surface:#000;--bg:#000;--line:#fff;
+  --gold-500:#ffd873;--gold-300:#ffd873;--link:#8fe9ff;--accent:#8fe9ff;
+}
+/* เส้นขอบ/ปุ่ม/อินพุตหนาขึ้นในโหมดความต่างสีสูง เพื่อให้ขอบเขตของ element ที่กดได้ชัดเจนกว่าโหมดปกติ */
+html[data-contrast="high"] .btn,html[data-contrast="high"] .card,html[data-contrast="high"] .fld input,
+html[data-contrast="high"] .fld textarea,html[data-contrast="high"] .chips a,html[data-contrast="high"] .tabs button,
+html[data-contrast="high"] .pager button,html[data-contrast="high"] .svc a,html[data-contrast="high"] .svc .svc-card,
+html[data-contrast="high"] .hd__burger,html[data-contrast="high"] .nav__search,html[data-contrast="high"] .cookie,
+html[data-contrast="high"] .modal,html[data-contrast="high"] .panel{border-width:2px}
+html[data-contrast="high"] .btn--gold,html[data-contrast="high"] .card__tag{background:#7a5a00;color:#fff}
+html[data-contrast="high"] .btn--brand{background:#00302f;color:#fff}
+html[data-theme="dark"][data-contrast="high"] .btn--gold,html[data-theme="dark"][data-contrast="high"] .card__tag{background:#ffd873;color:#000}
+html[data-theme="dark"][data-contrast="high"] .btn--brand{background:#8fe9ff;color:#000}
+/* วง focus หนาขึ้นและใช้สีที่ตัดกับพื้นแบบขาว-ดำ (ไม่พึ่งโทนทองซึ่งอาจกลืนกับพื้นในบางกรณี) */
+html[data-contrast="high"] :focus-visible{outline-width:4px;outline-offset:2px;outline-color:#000}
+html[data-theme="dark"][data-contrast="high"] :focus-visible{outline-color:#fff}
+
+/* ===== 2. RESET ===== */
+*,*::before,*::after{box-sizing:border-box}
+html{font-size:var(--font-base);scroll-behavior:smooth;scroll-padding-top:110px;-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--ff-body);color:var(--ink);background:var(--bg);line-height:1.75;overflow-x:hidden}
+body.is-preloading{overflow:hidden}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--link);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3,h4{font-family:var(--ff-head);line-height:1.35;margin:0 0 .5em;font-weight:600}
+ul{margin:0;padding:0;list-style:none}
+button,input,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--gold-500);outline-offset:3px;border-radius:4px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.container{width:min(100% - 40px,var(--wrap));margin-inline:auto}
+.skip-link{position:absolute;left:16px;top:-60px;z-index:9999;background:var(--gold-500);color:#111;padding:10px 18px;border-radius:0 0 8px 8px;font-weight:600;transition:top .25s}
+.skip-link:focus{top:0}
+
+/* ===== 3. BUTTONS ===== */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border:2px solid transparent;border-radius:999px;font-family:var(--ff-head);font-weight:600;cursor:pointer;transition:transform .18s var(--ease),box-shadow .18s var(--ease),background .18s var(--ease),color .18s var(--ease);text-decoration:none;-webkit-tap-highlight-color:transparent}
+.btn:hover{transform:translateY(-2px);text-decoration:none}
+.btn:active{transform:translateY(0) scale(.97);transition-duration:.08s}
+.btn--gold{background:var(--gold-500);color:#1a1305;box-shadow:0 8px 22px rgba(199,155,59,.35)}
+.btn--gold:hover{background:var(--gold-300);box-shadow:0 10px 26px rgba(199,155,59,.45)}
+.btn--gold:active{background:var(--gold-500);box-shadow:0 4px 14px rgba(199,155,59,.4)}
+.btn--brand{background:var(--brand-700);color:#fff}
+.btn--brand:hover{background:var(--brand-500)}
+.btn--brand:active{background:var(--brand-700)}
+.btn--ghost{border-color:rgba(255,255,255,.75);color:#fff}
+.btn--ghost:hover{background:rgba(255,255,255,.14)}
+.btn--ghost:active{background:rgba(255,255,255,.24)}
+/* บั๊ก: btn--ghost ใช้สีขาวล้วน ทำให้มองไม่เห็นเมื่ออยู่บนพื้นหลังสว่าง (เช่น ปุ่ม "ดูทั้งหมด" ในเซคชันข่าว/ท่องเที่ยว) จึงปรับสีให้เข้ากับพื้นหลังสว่างโดยเฉพาะ */
+.sec:not(.sec--dark) .btn--ghost{border-color:var(--brand-300);color:var(--accent)}
+.sec:not(.sec--dark) .btn--ghost:hover{background:var(--tint)}
+.sec:not(.sec--dark) .btn--ghost:active{background:var(--brand-300);color:#fff}
+.btn--sm{padding:8px 18px;font-size:.9rem}
+.btn:disabled,.btn[aria-disabled="true"]{opacity:.55;cursor:not-allowed;transform:none!important;box-shadow:none!important}
+
+/* ===== 3b. INTERACTIVE STATES (hover / active-pressed / focus) ใช้ร่วมกับปุ่ม/ลิงก์/การ์ด/element ที่กดได้ทั้งหมด
+   หลักการ: hover = ยกเล็กน้อย/เปลี่ยนสีอ่อนลง, active(pressed) = ยุบตัวลงเล็กน้อยเร็วกว่า hover (ให้ความรู้สึกกดจริง),
+   focus-visible = ใช้ outline ทองเดิมของเว็บไซต์ (เห็นชัดทั้งคีย์บอร์ดและสกรีนรีดเดอร์) ไม่ใส่อนิเมชั่นซ้อนกันเกินจำเป็น */
+a,button,.btn,.card,.chips a,.tabs button,.pager button,.svc a,.svc .svc-card,
+.nav__list>li>a,.sub a,.totop,.modal__close,.share button,.share a,.files a,.tags a,
+.artnav a,.prevnext a,.a11y button,.hero__dots button,.hd__burger,#cookieOk{
+  -webkit-tap-highlight-color:transparent;
+}
+.a11y button{transition:background .15s var(--ease),transform .1s var(--ease)}
+.a11y button:active{transform:scale(.92);background:rgba(255,255,255,.22)}
+.chips a{transition:background .22s var(--ease),color .22s var(--ease),border-color .22s var(--ease),transform .15s var(--ease)}
+.chips a:active{transform:scale(.96)}
+.tabs button:active{transform:scale(.96);transition-duration:.08s}
+.pager button{transition:background .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease),transform .1s var(--ease)}
+.pager button:not(:disabled):active{transform:scale(.94)}
+.svc a:active,.svc .svc-card:active{transform:translateY(-2px) scale(.985);transition-duration:.08s}
+.card:active{transition-duration:.12s}
+.totop{transition:background .2s var(--ease),transform .2s var(--ease)}
+.totop:hover{transform:translateY(-3px)}
+.totop:active{transform:scale(.9)}
+.modal__close{transition:background .18s var(--ease),transform .12s var(--ease)}
+.modal__close:active{transform:scale(.9)}
+.share button,.share a{transition:background .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease),transform .12s var(--ease)}
+.share button:active,.share a:active{transform:scale(.92)}
+.files a,.tags a,.artnav a,.prevnext a{transition:background .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease),transform .12s var(--ease)}
+.files a:active,.artnav a:active,.prevnext a:active{transform:scale(.98)}
+.tags a:active{transform:scale(.95)}
+.nav__list>li>a{transition:background .18s var(--ease),color .18s var(--ease)}
+.hero__dots button{transition:background .2s var(--ease),border-color .2s var(--ease),transform .15s var(--ease)}
+.hero__dots button:hover{border-color:var(--gold-300)}
+.hero__dots button:active{transform:scale(.85)}
+.hd__burger{transition:border-color .2s var(--ease),background .2s var(--ease)}
+.hd__burger:hover{border-color:var(--brand-300)}
+.hd__burger:active i{background:var(--link)}
+@media (prefers-reduced-motion:reduce){
+  .btn,.btn:hover,.btn:active,.a11y button,.chips a,.tabs button,.pager button,.svc a,.svc .svc-card,
+  .totop,.modal__close,.share button,.share a,.files a,.tags a,.artnav a,.prevnext a,
+  .nav__list>li>a,.hero__dots button,.hd__burger{transform:none!important;transition-duration:.001ms!important}
+}
+
+/* ===== 4. TOPBAR + HEADER ===== */
+.topbar{background:var(--brand-900);color:#D9E6E4;font-size:.86rem}
+.topbar__in{display:flex;justify-content:space-between;align-items:center;min-height:38px;gap:16px}
+.topbar__txt{margin:0}
+.topbar a{color:var(--gold-300)}
+.a11y{display:flex;gap:6px}
+.a11y button{width:32px;height:26px;border:1px solid rgba(255,255,255,.28);background:transparent;color:#fff;border-radius:6px;cursor:pointer;line-height:1}
+.a11y button:hover{background:rgba(255,255,255,.15)}
+
+.hd{position:sticky;top:0;z-index:900;background:var(--surface);border-bottom:1px solid var(--line);transition:box-shadow .3s}
+.hd.is-stuck{box-shadow:var(--shadow)}
+.hd__in{display:flex;align-items:center;gap:18px;min-height:78px}
+.hd__brand{display:flex;align-items:center;gap:12px;color:var(--ink)}
+.hd__brand:hover{text-decoration:none}
+.hd__brand b{display:block;font-family:var(--ff-head);font-size:1.18rem;line-height:1.25}
+.hd__brand small{display:block;font-size:.72rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.hd__burger{display:none;flex-direction:column;gap:5px;width:44px;height:44px;border:1px solid var(--line);border-radius:10px;background:var(--surface);cursor:pointer;align-items:center;justify-content:center;margin-left:auto;position:relative;z-index:960}
+.hd__burger i{width:20px;height:2px;background:var(--ink);transition:.3s var(--ease)}
+.hd__burger[aria-expanded="true"] i:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hd__burger[aria-expanded="true"] i:nth-child(2){opacity:0}
+.hd__burger[aria-expanded="true"] i:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+.nav{margin-left:auto;display:flex;align-items:center;gap:14px}
+.nav__list{display:flex;align-items:center;gap:2px}
+.nav__list>li>a{display:block;padding:12px 13px;border-radius:8px;color:var(--ink);font-family:var(--ff-head);font-weight:500;font-size:.95rem}
+.nav__list>li>a:hover,.nav__list>li>a[aria-expanded="true"]{background:var(--tint);color:var(--link);text-decoration:none}
+.has-sub{position:relative}
+.sub{position:absolute;top:100%;left:0;min-width:250px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);box-shadow:var(--shadow-lg);padding:8px;opacity:0;visibility:hidden;transform:translateY(10px);transition:.25s var(--ease)}
+.has-sub:hover .sub,.has-sub:focus-within .sub{opacity:1;visibility:visible;transform:none}
+.sub a{display:block;padding:9px 12px;border-radius:6px;color:var(--ink);font-size:.92rem;transition:background .18s var(--ease),color .18s var(--ease)}
+.sub a:hover{background:var(--tint);color:var(--link);text-decoration:none}
+.sub a:active{background:var(--brand-300);color:#fff}
+.nav__search{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.nav__search input{border:0;padding:9px 14px;width:130px;background:transparent}
+.nav__search input:focus{outline:none;width:180px}
+.nav__search button{border:0;background:var(--tint);padding:0 14px;cursor:pointer}
+
+/* ===== 5. HERO ===== */
+.hero{position:relative;min-height:clamp(520px,82vh,760px);display:grid;grid-template-rows:1fr auto;color:#fff;isolation:isolate;overflow:hidden;background:radial-gradient(120% 140% at 20% 0%,var(--brand-300) 0%,var(--brand-500) 45%,var(--brand-700) 100%)}
+.card__media{background:linear-gradient(150deg,var(--brand-500),var(--brand-700))}
+img.img-fallback{opacity:.96}
+.hero__slides{position:absolute;inset:0;z-index:-2}
+.hero__slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transform:scale(1.08);transition:opacity 1.4s var(--ease),transform 9s linear}
+.hero__slide.is-active{opacity:1;transform:scale(1)}
+.hero__overlay{position:absolute;inset:0;z-index:-1;background:linear-gradient(100deg,rgba(7,26,27,.92) 0%,rgba(7,26,27,.66) 45%,rgba(7,26,27,.30) 100%)}
+.hero__body{align-self:center;padding:80px 0 40px;max-width:720px}
+.hero__kicker{margin:0 0 10px;letter-spacing:.22em;text-transform:uppercase;font-size:.78rem;color:var(--gold-300)}
+.hero__title{font-size:clamp(2.4rem,6vw,4.2rem);margin:0 0 14px;text-shadow:0 4px 30px rgba(0,0,0,.5)}
+.hero__quote{font-size:clamp(1rem,2vw,1.28rem);color:#E6EFEE;margin:0 0 30px}
+.hero__cta{display:flex;gap:14px;flex-wrap:wrap}
+.hero__stats{position:relative;display:grid;grid-template-columns:repeat(4,1fr);background:rgba(7,26,27,.78);backdrop-filter:blur(10px);border-top:1px solid rgba(255,255,255,.12)}
+.hero__stats li{padding:18px 20px;text-align:center;border-left:1px solid rgba(255,255,255,.1)}
+.hero__stats li:first-child{border-left:0}
+.hero__stats b{display:block;font-family:var(--ff-head);font-size:1.6rem;color:var(--gold-300)}
+.hero__stats span{font-size:.85rem;color:#C6D6D4}
+.hero__dots{position:absolute;right:28px;top:50%;transform:translateY(-50%);display:grid;gap:10px}
+.hero__dots button{width:11px;height:11px;padding:0;border-radius:50%;border:2px solid #fff;background:transparent;cursor:pointer}
+.hero__dots button[aria-selected="true"]{background:var(--gold-500);border-color:var(--gold-500)}
+
+/* ===== 6. SECTIONS ===== */
+.sec{padding:clamp(56px,7vw,96px) 0}
+.sec--tint{background:var(--tint)}
+.sec--dark{background:linear-gradient(160deg,var(--brand-700),var(--brand-500));color:#EAF2F1}
+.sec--dark .sec__desc{color:#DCEEEC}
+.sec__head{margin-bottom:38px;max-width:760px}
+.sec__head--row{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;max-width:none;flex-wrap:wrap}
+.sec__title{font-size:clamp(1.5rem,3vw,2.1rem);margin:0 0 8px}
+.sec__title span{display:block;font-size:.8rem;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-500);margin-top:4px}
+.sec__desc{margin:0;color:var(--muted)}
+.news__search input{border:1px solid var(--line);border-radius:999px;padding:11px 20px;min-width:260px;background:var(--surface)}
+
+/* ===== 7. E-SERVICE ===== */
+.svc{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap)}
+.svc a:hover{text-decoration:none}
+.svc .ic{font-size:2rem;line-height:1}
+.svc b{font-family:var(--ff-head);font-size:1rem}
+.svc small{color:var(--muted);font-size:.85rem}
+
+/* ===== 8. TABS + CARDS + PAGER ===== */
+.tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:26px;border-bottom:1px solid var(--line);padding-bottom:14px;min-width:0}
+.tabs button{padding:9px 20px;border:1px solid var(--line);background:var(--surface);border-radius:999px;cursor:pointer;font-family:var(--ff-head);font-size:.92rem;transition:.2s}
+.tabs button:hover{border-color:var(--brand-300)}
+.tabs button[aria-selected="true"]{background:var(--brand-500);color:#fff;border-color:var(--brand-500)}
+
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;transition:.3s var(--ease)}
+.card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+.card__media{position:relative;aspect-ratio:16/10;overflow:hidden;background:var(--tint)}
+.card__media img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.card:hover .card__media img{transform:scale(1.07)}
+.card__tag{position:absolute;top:12px;left:12px;background:var(--gold-500);color:#1a1305;padding:4px 12px;border-radius:999px;font-size:.76rem;font-weight:600}
+.card__body{padding:20px;display:flex;flex-direction:column;gap:9px;flex:1}
+.card__date{font-size:.82rem;color:var(--muted);display:flex;align-items:center;gap:8px}
+.card__title{font-size:1.03rem;margin:0}
+.card__title a{color:var(--ink)}
+.card__title a:hover{color:var(--link)}
+.card__ex{font-size:.9rem;color:var(--muted);margin:0;flex:1}
+.card__more{font-weight:600;font-size:.88rem;color:var(--link)}
+.empty{text-align:center;padding:60px 0;color:var(--muted)}
+
+.pager{display:flex;justify-content:center;gap:8px;margin-top:38px;flex-wrap:wrap}
+.pager button{min-width:42px;height:42px;border:1px solid var(--line);background:var(--surface);border-radius:10px;cursor:pointer;font-family:var(--ff-head)}
+.pager button:hover:not(:disabled){border-color:var(--link);color:var(--link)}
+.pager button[aria-current="page"]{background:var(--brand-700);color:#fff;border-color:var(--brand-700)}
+.pager button:disabled{opacity:.4;cursor:not-allowed}
+
+/* ===== 9. ITA ===== */
+.ita{display:grid;grid-template-columns:1fr 320px;gap:40px;align-items:start}
+.ita__list{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.ita__list a{display:flex;gap:12px;align-items:center;padding:16px 18px;background:rgba(6,20,20,.16);border:1px solid rgba(255,255,255,.22);border-radius:var(--radius-sm);color:#EAF2F1;transition:.25s}
+.ita__list a:hover{background:rgba(6,20,20,.28);transform:translateX(5px);text-decoration:none}
+.ita__list .code{font-family:var(--ff-head);color:var(--gold-300);font-weight:600;min-width:44px}
+.ita__score{background:rgba(6,20,20,.18);border:1px solid rgba(255,255,255,.24);border-radius:var(--radius);padding:30px;text-align:center}
+.ita__label{margin:0;font-size:.85rem;color:#DCEEEC}
+.ita__num{font-family:var(--ff-head);font-size:3.3rem;color:var(--gold-300);margin:6px 0;line-height:1}
+.ita__num small{font-size:.95rem;color:#B9CFCD;margin-left:6px}
+.ita__grade{margin:0 0 18px;font-size:.95rem}
+
+/* ===== 10. TRAVEL / CHIPS / ABOUT / CONTACT ===== */
+.cards--travel .card__media{aspect-ratio:4/3}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chips a{padding:10px 20px;background:var(--surface);border:1px solid var(--line);border-radius:999px;color:var(--ink);font-size:.92rem}
+.chips a:hover{background:var(--brand-700);color:#fff;border-color:var(--brand-700);text-decoration:none}
+
+.about{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.about__facts{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:24px}
+.about__facts li{background:var(--tint);border-left:4px solid var(--gold-500);border-radius:0 8px 8px 0;padding:12px 16px}
+.about__facts b{display:block;font-family:var(--ff-head);color:var(--accent)}
+.about__facts span{font-size:.85rem;color:var(--muted)}
+.about__fig{margin:0;background:none}
+.about__fig .about__frame{position:relative;overflow:hidden;border-radius:var(--radius);box-shadow:var(--shadow-lg);aspect-ratio:4/3;background:none;isolation:isolate}
+.about__fig .about__frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+/* Caption overlay: ทับอยู่บนภาพเต็มกรอบเดิม (ไม่ลดขนาด/ไม่ทำให้ภาพหด) ครอบด้วย overflow:hidden ของ .about__frame
+   จึงถูกตัดขอบตาม border-radius พอดี ไม่มีมุมโผล่ให้เห็นสีพื้นหลังใด ๆ */
+.about__fig .about__frame .about__caption{
+  position:absolute;left:0;right:0;bottom:0;z-index:1;margin:0;
+  padding:44px 20px 16px;
+  background:linear-gradient(to top,rgba(6,20,20,.86) 0%,rgba(6,20,20,.55) 60%,rgba(6,20,20,0) 100%);
+  color:#fff;font-family:var(--ff-head);font-weight:600;font-size:1.05rem;line-height:1.4;
+  text-shadow:0 2px 10px rgba(0,0,0,.4);
+}
+.about__fig .about__frame .about__caption span{display:block;font-family:var(--ff-body);font-weight:400;font-size:.86rem;color:#D9E9E7;margin-top:2px}
+
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.contact__info{font-style:normal;color:var(--muted)}
+.contact__info b{color:var(--ink)}
+.contact__form{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px;display:grid;gap:16px}
+.fld{display:grid;gap:6px}
+.fld label{font-weight:600;font-size:.92rem}
+.fld input,.fld textarea{border:1px solid var(--line);border-radius:var(--radius-sm);padding:11px 14px;background:var(--surface);resize:vertical}
+.fld input:focus,.fld textarea:focus{border-color:var(--link);outline:none;box-shadow:0 0 0 3px rgba(30,111,112,.15)}
+.fld input[aria-invalid="true"],.fld textarea[aria-invalid="true"]{border-color:#C0392B}
+.fld__err{color:#C0392B;font-size:.88rem;margin:0}
+.ok{color:#1E7A45;font-size:.9rem;margin:0}
+
+/* ===== 11. FOOTER + UTILS ===== */
+.ft{background:var(--brand-900);color:#C6D6D4;padding-top:56px;font-size:.92rem}
+.ft__grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:36px;padding-bottom:40px}
+.ft h3{color:#fff;font-size:1rem;margin-bottom:14px}
+.ft a{color:#C6D6D4}
+.ft a:hover{color:var(--gold-300)}
+.ft li{margin-bottom:9px}
+.ft__bar{border-top:1px solid rgba(255,255,255,.12);padding:16px 0;font-size:.84rem}
+.ft__bar .container{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.ft__bar p{margin:0}
+
+.totop{position:fixed;right:22px;bottom:22px;width:48px;height:48px;border:0;border-radius:50%;background:var(--brand-700);color:#fff;font-size:1.2rem;cursor:pointer;box-shadow:var(--shadow-lg);z-index:800}
+.totop:hover{background:var(--brand-500)}
+.cookie{position:fixed;left:22px;bottom:22px;z-index:850;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-lg);padding:18px 20px;max-width:380px;display:flex;gap:14px;align-items:center}
+.cookie p{margin:0;font-size:.88rem}
+
+[data-reveal]{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+[data-reveal].is-in{opacity:1;transform:none}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  [data-reveal]{opacity:1;transform:none}
+}
+@media print{.topbar,.hd,.hero__dots,.totop,.cookie,#preloader,.toast,.modal-overlay{display:none!important}}
+
+/* ===== 12. TOAST + MODAL (ใช้ร่วมทุกหน้า) ===== */
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,20px);background:var(--brand-900);color:#fff;padding:13px 24px;border-radius:999px;box-shadow:var(--shadow-lg);font-size:.9rem;opacity:0;pointer-events:none;transition:.3s var(--ease);z-index:1200;max-width:min(92vw,460px);text-align:center}
+.toast.is-on{opacity:1;transform:translate(-50%,0)}
+
+.modal-overlay{position:fixed;inset:0;background:rgba(4,16,15,.6);display:flex;align-items:center;justify-content:center;padding:20px;z-index:1300;opacity:0;visibility:hidden;transition:opacity .25s var(--ease),visibility .25s}
+.modal-overlay.is-on{opacity:1;visibility:visible}
+.modal{background:var(--surface);border-radius:var(--radius);max-width:480px;width:100%;padding:30px;position:relative;transform:translateY(16px);transition:transform .25s var(--ease);max-height:86vh;overflow-y:auto}
+.modal-overlay.is-on .modal{transform:none}
+.modal__close{position:absolute;top:14px;right:14px;width:36px;height:36px;border:0;background:var(--tint);border-radius:50%;cursor:pointer;font-size:1.3rem;line-height:1;color:var(--ink)}
+.modal__close:hover{background:var(--line)}
+@media (prefers-reduced-motion:reduce){.toast,.modal-overlay,.modal{transition:none}}
+
+/* svc-card: เหมือน .svc a ทุกประการ แต่ใช้เมื่อรายการนั้นไม่ใช่ลิงก์จริง (เช่น การ์ดสรุปคะแนนที่ไม่มีปลายทาง) */
+.svc a,.svc .svc-card{display:grid;gap:10px;padding:26px 22px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);color:var(--ink);text-align:center;transition:.28s var(--ease);height:100%}
+.svc .svc-card{cursor:default}
+.svc a:hover,.svc .svc-card:hover{transform:translateY(-6px);border-color:var(--brand-300);box-shadow:var(--shadow-lg)}
+
+

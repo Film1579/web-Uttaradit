@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="th" data-base="../">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ท่องเที่ยวและของดีจังหวัดอุตรดิตถ์ | แหล่งท่องเที่ยว OTOP และ GI</title>
+<meta name="description" content="รวมแหล่งท่องเที่ยวธรรมชาติ ศาสนสถาน วัฒนธรรม และสินค้า OTOP/GI ขึ้นชื่อของจังหวัดอุตรดิตถ์">
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500;600;700&family=Sarabun:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/pages.css">
+<link rel="stylesheet" href="../css/responsive.css">
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#12484A">
+</head>
+<body>
+
+<section class="phead">
+  <div class="container">
+    <nav class="crumb" aria-label="เส้นทางนำทาง"><ol>
+      <li><a href="../index.html">หน้าแรก</a></li>
+      <li aria-current="page">ท่องเที่ยว &amp; ของดี</li>
+    </ol></nav>
+    <h1>ท่องเที่ยวและของดีจังหวัด</h1>
+    <p>ธรรมชาติ ศาสนสถาน วิถีชุมชน และสินค้าขึ้นชื่อที่บอกเล่าตัวตนของอุตรดิตถ์</p>
+  </div>
+</section>
+
+<main id="main" class="container" style="padding:clamp(40px,5vw,68px) 0">
+  <div class="tabs" role="tablist" aria-label="ประเภทแหล่งท่องเที่ยว" id="tvTabs"></div>
+  <ul class="cards cards--travel" id="tvGrid" aria-live="polite"></ul>
+
+  <section class="sec sec--tint" style="margin-top:56px;border-radius:var(--radius);padding:44px 0" aria-labelledby="hRoute">
+    <div class="container">
+      <h2 id="hRoute" class="sec__title">เส้นทางท่องเที่ยวแนะนำ <span>Suggested Routes</span></h2>
+      <p class="note" style="margin-top:14px">
+        <b>หมายเหตุ:</b> การจัดกลุ่ม "เส้นทางแนะนำ" และระยะเวลาด้านล่างเป็นข้อเสนอแนะเชิงเนื้อหาที่จัดทำโดยทีมงานเว็บไซต์
+        โดยใช้เฉพาะสถานที่จริงที่ตรวจสอบยืนยันได้ ไม่ใช่เส้นทางอย่างเป็นทางการจากการท่องเที่ยวแห่งประเทศไทยหรือหน่วยงานททท.
+      </p>
+      <div class="tbl-wrap" style="margin-top:22px">
+        <table class="tbl">
+          <caption>เส้นทางท่องเที่ยวแนะนำของจังหวัดอุตรดิตถ์ (จัดทำโดยทีมงานเว็บไซต์)</caption>
+          <thead><tr><th style="width:190px">เส้นทาง</th><th>จุดแวะสำคัญ</th><th style="width:130px">ระยะเวลาโดยประมาณ</th></tr></thead>
+          <tbody>
+            <tr><td class="code">สายศรัทธา</td><td>วัดพระแท่นศิลาอาสน์ → วัดพระบรมธาตุทุ่งยั้ง → อนุสาวรีย์พระยาพิชัยดาบหัก</td><td>1 วัน</td></tr>
+            <tr><td class="code">สายธรรมชาติ</td><td>เขื่อนสิริกิติ์ → อุทยานแห่งชาติต้นสักใหญ่</td><td>1–2 วัน</td></tr>
+            <tr><td class="code">สายผจญภัย</td><td>อุทยานแห่งชาติภูสอยดาว (ลานสนสามใบ · ทุ่งดอกหงอนนาค)</td><td>2 วัน 1 คืน</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section style="margin-top:56px" aria-labelledby="hGI">
+    <h2 id="hGI" class="sec__title">สินค้า GI <span>สิ่งบ่งชี้ทางภูมิศาสตร์</span></h2>
+    <p class="note" style="margin-top:14px"><b>หมายเหตุ:</b> สินค้ากลุ่มนี้ผ่านการขึ้นทะเบียนสิ่งบ่งชี้ทางภูมิศาสตร์ (Geographical Indication)
+      กับกรมทรัพย์สินทางปัญญาแล้วจริง คลิก “ดูรายละเอียด” ของแต่ละรายการเพื่ออ่านปีที่ขึ้นทะเบียนและแหล่งผลิต</p>
+    <ul class="svc" id="giGrid" style="margin-top:24px" aria-live="polite"></ul>
+  </section>
+
+  <section style="margin-top:56px" aria-labelledby="hOtop">
+    <h2 id="hOtop" class="sec__title">สินค้า OTOP <span>Local Products</span></h2>
+    <p class="note" style="margin-top:14px"><b>หมายเหตุ:</b> สินค้ากลุ่มนี้เป็นของดี/สินค้า OTOP ประจำถิ่นที่มีชื่อเสียงของจังหวัด
+      แต่ยังไม่พบประกาศขึ้นทะเบียนเป็นสิ่งบ่งชี้ทางภูมิศาสตร์ (GI) จากกรมทรัพย์สินทางปัญญา จึงแยกออกจากกลุ่มสินค้า GI ด้านบนอย่างชัดเจน</p>
+    <ul class="svc" id="otopGrid" style="margin-top:24px" aria-live="polite"></ul>
+    <p class="note note--src" style="margin-top:20px"><b>หมายเหตุแหล่งอ้างอิง:</b> รายการสินค้า OTOP/GI ข้างต้นเป็นรายการที่ตรวจสอบยืนยันได้จากข้อมูลค้นคว้า ณ วันที่ตรวจสอบข้อมูล อาจมีสินค้า OTOP อื่นของจังหวัดที่ยังไม่ได้รวบรวมไว้ในหน้านี้</p>
+  </section>
+</main>
+
+<script src="../js/img-fallback.js"></script>
+<script src="../js/ui.js"></script>
+<script src="../js/config.js"></script>
+<script src="../js/api.js"></script>
+<script src="../js/shell.js"></script>
+<script src="../js/page-travel.js"></script>
+</body>
+</html>
+
+
