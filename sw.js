@@ -2,7 +2,7 @@
    หมายเหตุ (ข้อ 14 ของ requirement): data/*.json คือแหล่งข้อมูลกลางที่ Admin แก้ไขจริง
    ต้องไม่ถูก cache-first เหมือน asset ทั่วไป มิฉะนั้นผู้ใช้จะเห็นข้อมูลเก่าค้างนานโดยไม่จำเป็น
    จึงตรวจแยกเส้นทาง /data/*.json ออกมาใช้กลยุทธ์ network-first เหมือน HTML */
-const V = "utt-v10";   // v10: เพิ่มระบบสองภาษา (js/i18n.js, js/i18n-dict.js) + ฟิลด์ *_en ใน data/*.json
+const V = "utt-v11";   // v11: แก้บัคเล็กน้อย
 const CORE = [
   "./", "./index.html", "./404.html",
   "./css/style.css", "./css/pages.css", "./css/responsive.css", "./css/preloader.css", "./css/home-local.css",
