@@ -32,7 +32,7 @@
     pct.textContent = Math.round(progress);
   }
 
-  function onReady()     { setProgress(100); setTimeout(() => setState(S.REVEALING), 420); }
+  function onReady()     { setProgress(100); setTimeout(() => setState(S.REVEALING), window.CloudGate ? 2300 : 420); }
   function onRevealing() { fog.stop(); setTimeout(() => setState(S.COMPLETE), 1000); }
   function onDone()      { finish(); }
   function onSkipped()   { fog.stop(); finish(); }
