@@ -71,5 +71,5 @@
     setTimeout(() => { setProgress(100); setState(S.READY); }, wait);
   });
 
-  guard = setTimeout(() => { if (state === S.LOADING) setState(S.SKIPPED); }, CFG.maxDuration);
+  guard = setTimeout(() => { if (state === S.LOADING) { setProgress(100); setState(S.READY); } }, CFG.maxDuration);
 })();
