@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="th" data-base="../">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i18n="ita.001">ITA — การเปิดเผยข้อมูลสาธารณะ (OIT) | จังหวัดอุตรดิตถ์</title>
+<meta name="description" content="ข้อมูลการเปิดเผยข้อมูลสาธารณะ (OIT) ข้อ O1–O43 ตามแบบวัด ITA ของจังหวัดอุตรดิตถ์" data-i18n-attr="content:ita.017">
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500;600;700&family=Sarabun:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/cloud-gate.css">
+<link rel="stylesheet" href="../css/pages.css">
+<link rel="stylesheet" href="../css/responsive.css">
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#12484A">
+<script src="../js/i18n-dict.js"></script>
+<script src="../js/i18n.js"></script>
+</head>
+<body>
+
+<!-- Cloud Gate: ต้องเป็นสิ่งแรกใน body เพื่อเริ่มปิดจอก่อนเนื้อหาอื่นจะ paint -->
+<script src="../js/cloud-gate.js"></script>
+
+<section class="phead">
+  <div class="container">
+    <nav class="crumb" aria-label="เส้นทางนำทาง" data-i18n-attr="aria-label:common.breadcrumb"><ol>
+      <li><a href="../index.html" data-i18n="nav.home">หน้าแรก</a></li>
+      <li aria-current="page" data-i18n="ita.002">ITA / ความโปร่งใส</li>
+    </ol></nav>
+    <h1 data-i18n="ita.003">การเปิดเผยข้อมูลสาธารณะ (OIT)</h1>
+    <p data-i18n="ita.004">แบบวัดการเปิดเผยข้อมูลสาธารณะ ข้อ O1–O43 ตามกรอบการประเมินคุณธรรมและความโปร่งใสในการดำเนินงานของหน่วยงานภาครัฐ (ITA) — ข้อมูลคะแนนล่าสุดที่ยืนยันได้: ปีงบประมาณ พ.ศ. 2567</p>
+  </div>
+</section>
+
+<main id="main" class="container" style="padding:clamp(40px,5vw,68px) 0">
+
+  <ul class="svc" id="scoreCards" style="margin-bottom:44px" aria-label="ผลคะแนน ITA ย้อนหลัง" data-i18n-attr="aria-label:ita.018"></ul>
+
+  <div class="ita-tools">
+    <label class="sr-only" for="itaQ" data-i18n="ita.005">ค้นหาหัวข้อ OIT</label>
+    <input id="itaQ" type="search" placeholder="ค้นหาหัวข้อ หรือรหัส O…" data-i18n-attr="placeholder:ita.019">
+    <label class="sr-only" for="itaGrp" data-i18n="ita.006">กรองตามตัวชี้วัด</label>
+    <select id="itaGrp"><option value="" data-i18n="ita.007">ทุกตัวชี้วัด</option></select>
+    <label class="sr-only" for="itaSt" data-i18n="ita.008">กรองตามสถานะ</label>
+    <select id="itaSt">
+      <option value="" data-i18n="ita.009">ทุกสถานะ</option>
+      <option value="pending" data-i18n="ita.010">รอเชื่อมโยงข้อมูลจริง</option>
+    </select>
+    <p class="count" id="itaCount" aria-live="polite"></p>
+  </div>
+
+  <p class="note" style="margin-top:0" data-i18n="ita.011">
+    <b>หมายเหตุความโปร่งใส:</b> โครงหัวข้อ O1–O43 ด้านล่างจัดทำตามกรอบการประเมินมาตรฐานของสำนักงาน ป.ป.ช. ที่ใช้ทั่วประเทศ
+    แต่ลิงก์เอกสารและสถานะการเผยแพร่รายข้อของจังหวัดอุตรดิตถ์ยังไม่ได้รับการยืนยันในการค้นคว้าครั้งนี้ จึงแสดงสถานะ
+    "รอเชื่อมโยงข้อมูลจริง" ไว้ทุกข้อ จนกว่าจะเชื่อมต่อกับหน้าเว็บไซต์ ITA ที่เผยแพร่จริงของจังหวัด นอกจากนี้ ITA ระดับจังหวัด
+    (ที่ทำการปกครองจังหวัด/สำนักงานจังหวัด) แตกต่างจาก ITA ของหน่วยงานราชการส่วนภูมิภาคแต่ละแห่งในจังหวัด ซึ่งประเมินแยกกัน
+  </p>
+
+  <div class="tbl-wrap">
+    <table class="tbl" id="itaTable">
+      <caption data-i18n="ita.012">ตารางข้อมูลการเปิดเผยข้อมูลสาธารณะ (Open Data Integrity and Transparency Assessment)</caption>
+      <thead><tr>
+        <th scope="col" style="width:90px" data-i18n="ita.013">รหัส</th>
+        <th scope="col" data-i18n="ita.014">ข้อมูลที่ต้องเปิดเผย</th>
+        <th scope="col" style="width:170px" data-i18n="ita.015">สถานะ</th>
+        <th scope="col" style="width:120px" data-i18n="ita.016">ลิงก์</th>
+      </tr></thead>
+      <tbody id="itaBody"></tbody>
+    </table>
+  </div>
+  <p class="empty" id="itaEmpty" hidden data-i18n="common.noMatch">ไม่พบรายการที่ตรงกับเงื่อนไข</p>
+
+</main>
+
+<script src="../js/img-fallback.js"></script>
+<script src="../js/ui.js"></script>
+<script src="../js/data.js"></script>
+<script src="../js/shell.js"></script>
+<script src="../js/page-ita.js"></script>
+</body>
+</html>

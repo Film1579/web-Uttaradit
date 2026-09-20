@@ -1,0 +1,93 @@
+[
+  {
+    "id": 1,
+    "type": "gi",
+    "t": "ทุเรียนหลงลับแลอุตรดิตถ์",
+    "tag": "สินค้า GI",
+    "img": "assets/img/home-local/featured/local-01-featured.jpg",
+    "s": "ทุเรียนพันธุ์พื้นเมืองอำเภอลับแล ผลเล็ก เนื้อแห้งละเอียด รสหวานมัน ขึ้นทะเบียน GI ตั้งแต่ปี 2561",
+    "homeSq": "assets/img/home-local/square/local-01-square.png",
+    "homeFeatured": "assets/img/home-local/featured/local-01-featured.jpg",
+    "t_en": "Long Lap Lae Durian of Uttaradit",
+    "tag_en": "GI Product",
+    "s_en": "A native durian variety of Lap Lae District: small fruit, fine dry flesh, rich sweet flavor. Registered as a GI in B.E. 2561 (2018)."
+  },
+  {
+    "id": 2,
+    "type": "gi",
+    "t": "ทุเรียนหลินลับแลอุตรดิตถ์",
+    "tag": "สินค้า GI",
+    "img": "assets/img/home-local/featured/local-02-featured.jpg",
+    "s": "ทุเรียนพันธุ์พื้นเมืองอำเภอลับแลอีกสายพันธุ์ ผลทรงกระบอก เนื้อเหนียวแห้ง ขึ้นทะเบียน GI ตั้งแต่ปี 2561",
+    "homeSq": "assets/img/home-local/square/local-02-square.png",
+    "homeFeatured": "assets/img/home-local/featured/local-02-featured.jpg",
+    "t_en": "Lin Lap Lae Durian of Uttaradit",
+    "tag_en": "GI Product",
+    "s_en": "Another native Lap Lae durian variety: cylindrical fruit with firm, dry flesh. Registered as a GI in B.E. 2561 (2018)."
+  },
+  {
+    "id": 3,
+    "type": "gi",
+    "t": "สับปะรดห้วยมุ่น",
+    "tag": "สินค้า GI",
+    "img": "assets/img/home-local/featured/local-03-featured.jpg",
+    "s": "สับปะรดพันธุ์ปัตตาเวียจากอำเภอน้ำปาด เนื้อสีเหลืองน้ำผึ้ง หวานฉ่ำ ขึ้นทะเบียน GI ตั้งแต่ปี 2556",
+    "homeSq": "assets/img/home-local/square/local-03-square.png",
+    "homeFeatured": "assets/img/home-local/featured/local-03-featured.jpg",
+    "t_en": "Huai Mun Pineapple",
+    "tag_en": "GI Product",
+    "s_en": "A Smooth Cayenne (Pattavia) pineapple from Nam Pat District with honey-yellow, sweet, juicy flesh. Registered as a GI in B.E. 2556 (2013)."
+  },
+  {
+    "id": 4,
+    "type": "otop",
+    "t": "เหล็กน้ำพี้",
+    "tag": "สินค้า OTOP",
+    "img": "assets/img/home-local/featured/local-04-featured.jpg",
+    "s": "แร่เหล็กศักดิ์สิทธิ์ ต้นกำเนิดดาบพระยาพิชัย",
+    "homeSq": "assets/img/home-local/square/local-04-square.png",
+    "homeFeatured": "assets/img/home-local/featured/local-04-featured.jpg",
+    "t_en": "Namphi Iron",
+    "tag_en": "OTOP Product",
+    "s_en": "Sacred iron ore, the origin of Phraya Phichai's sword"
+  },
+  {
+    "id": 5,
+    "type": "otop",
+    "t": "ลางสาด–ลองกอง",
+    "tag": "สินค้า OTOP",
+    "img": "assets/img/home-local/featured/local-05-featured.jpg",
+    "s": "ผลไม้ประจำถิ่นรสหวานฉ่ำ",
+    "homeSq": "assets/img/home-local/square/local-05-square.png",
+    "homeFeatured": "assets/img/home-local/featured/local-05-featured.jpg",
+    "t_en": "Langsat–Longkong",
+    "tag_en": "OTOP Product",
+    "s_en": "Sweet, juicy local fruits"
+  },
+  {
+    "id": 6,
+    "type": "otop",
+    "t": "ผ้าซิ่นตีนจกลับแล",
+    "tag": "สินค้า OTOP",
+    "img": "assets/img/home-local/featured/local-06-featured.jpg",
+    "s": "ภูมิปัญญาทอมือลวดลายโบราณ",
+    "homeSq": "assets/img/home-local/square/local-06-square.png",
+    "homeFeatured": "assets/img/home-local/featured/local-06-featured.jpg",
+    "t_en": "Lap Lae Tin Chok Skirt",
+    "tag_en": "OTOP Product",
+    "s_en": "Hand-woven heritage with ancient patterns"
+  },
+  {
+    "id": 7,
+    "type": "otop",
+    "t": "ผลิตภัณฑ์ไม้สัก",
+    "tag": "สินค้า OTOP",
+    "img": "assets/img/home-local/featured/local-07-featured.jpg",
+    "s": "งานแกะสลักจากถิ่นสักใหญ่ของโลก",
+    "homeSq": "assets/img/home-local/square/local-07-square.png",
+    "homeFeatured": "assets/img/home-local/featured/local-07-featured.jpg",
+    "t_en": "Teak Wood Products",
+    "tag_en": "OTOP Product",
+    "s_en": "Carvings from the Land of the World's Largest Teak"
+  }
+]

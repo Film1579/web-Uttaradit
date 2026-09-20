@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "t": "เขื่อนสิริกิติ์",
+    "s": "เขื่อนดินที่ใหญ่ที่สุดในประเทศไทย ต.ผาเลือด อ.ท่าปลา วิวอ่างเก็บน้ำรายล้อมภูเขา",
+    "tag": "ธรรมชาติ",
+    "img": "assets/img/t1.jpg",
+    "t_en": "Sirikit Dam",
+    "s_en": "The largest earth-fill dam in Thailand, in Pha Lueat Subdistrict, Tha Pla District — a reservoir with views ringed by mountains",
+    "tag_en": "Nature"
+  },
+  {
+    "id": 2,
+    "t": "วัดพระแท่นศิลาอาสน์ (พระอารามหลวง)",
+    "s": "ต.ทุ่งยั้ง อ.ลับแล — พระแท่นศิลาแลง ที่มาของตราประจำจังหวัด",
+    "tag": "ศาสนสถาน",
+    "img": "assets/img/t2.jpg",
+    "t_en": "Wat Phra Thaen Sila At (Royal Monastery)",
+    "s_en": "Thung Yang Subdistrict, Lap Lae District — the laterite Phra Thaen (sacred stone seat) that inspired the provincial seal",
+    "tag_en": "Religious Site"
+  },
+  {
+    "id": 3,
+    "t": "อุทยานแห่งชาติภูสอยดาว",
+    "s": "อ.น้ำปาด — ทุ่งดอกหงอนนาคและลานสนสามใบ นิยมเดินป่าช่วง ส.ค.–ก.ย.",
+    "tag": "ธรรมชาติ",
+    "img": "assets/img/t3.jpg",
+    "t_en": "Phu Soi Dao National Park",
+    "s_en": "Nam Pat District — Hong Nak flower fields and three-needle pine meadows; popular for trekking from August to September",
+    "tag_en": "Nature"
+  },
+  {
+    "id": 4,
+    "t": "อุทยานแห่งชาติต้นสักใหญ่",
+    "s": "ต.น้ำไคร้ อ.น้ำปาด — ต้นสักขนาดใหญ่ที่สุดในประเทศไทย",
+    "tag": "ธรรมชาติ",
+    "img": "assets/img/t4.jpg",
+    "t_en": "Ton Sak Yai (Giant Teak) National Park",
+    "s_en": "Nam Khrai Subdistrict, Nam Pat District — the largest teak tree in Thailand",
+    "tag_en": "Nature"
+  },
+  {
+    "id": 5,
+    "t": "อนุสาวรีย์พระยาพิชัยดาบหัก",
+    "s": "บริเวณศาลากลางจังหวัด ต.ท่าอิฐ อ.เมืองอุตรดิตถ์",
+    "tag": "ประวัติศาสตร์",
+    "img": "assets/img/t5.jpg",
+    "t_en": "Phraya Phichai Dap Hak Monument",
+    "s_en": "Located at the Provincial Hall, Tha It Subdistrict, Mueang Uttaradit District",
+    "tag_en": "History"
+  }
+]

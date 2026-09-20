@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="th" data-base="../">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i18n="admin.001">จัดการข้อมูลเว็บไซต์ | จังหวัดอุตรดิตถ์</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="หน้าจัดการข้อมูลเว็บไซต์ฝั่ง Frontend สำหรับข่าวสารประจำจังหวัด ข้อมูลท่องเที่ยว และของดีจังหวัด" data-i18n-attr="content:admin.065">
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500;600;700&family=Sarabun:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/cloud-gate.css">
+<link rel="stylesheet" href="../css/pages.css">
+<link rel="stylesheet" href="../css/responsive.css">
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#12484A">
+<script src="../js/i18n-dict.js"></script>
+<script src="../js/i18n.js"></script>
+</head>
+<body>
+
+<!-- Cloud Gate: ต้องเป็นสิ่งแรกใน body เพื่อเริ่มปิดจอก่อนเนื้อหาอื่นจะ paint -->
+<script src="../js/cloud-gate.js"></script>
+
+<section class="phead">
+  <div class="container">
+    <nav class="crumb" aria-label="เส้นทางนำทาง" data-i18n-attr="aria-label:common.breadcrumb"><ol>
+      <li><a href="../index.html" data-i18n="nav.home">หน้าแรก</a></li>
+      <li aria-current="page" data-i18n="admin.002">จัดการข้อมูลเว็บไซต์</li>
+    </ol></nav>
+    <h1 data-i18n="admin.003">จัดการข้อมูลเว็บไซต์ <span style="font-weight:400;font-size:.6em;opacity:.85">Content Manager</span></h1>
+    <p data-i18n="admin.004">เพิ่ม แก้ไข และลบข่าวสารประจำจังหวัด ข้อมูลท่องเที่ยว และของดีจังหวัด — การเปลี่ยนแปลงที่นี่จะ
+      แสดงผลจริงบนหน้าเว็บไซต์ (หน้าแรก, ข่าวสาร, ท่องเที่ยว, รายละเอียดสินค้า) ทันทีที่บันทึก</p>
+  </div>
+</section>
+
+<main id="main" class="container" style="padding:clamp(40px,5vw,68px) 0">
+
+  <p class="note" role="note" data-i18n="admin.005">
+    <b>หมายเหตุการใช้งาน:</b> ข้อมูลในหน้านี้บันทึกลง <b>แหล่งข้อมูลกลางจริงของเว็บไซต์</b> (GitHub Repository)
+    ผ่าน Secure API — เมื่อบันทึกสำเร็จ ผู้ใช้ทุกคนจากทุกเครื่อง/เบราว์เซอร์จะเห็นข้อมูลเดียวกัน
+    (อาจใช้เวลาสักครู่ให้ GitHub Pages อัปเดตเว็บไซต์หลังบันทึก)
+  </p>
+
+  <!-- ========== LOGIN GATE ========== -->
+  <section id="adminLogin" class="panel" style="max-width:420px;margin:0 auto">
+    <h2 class="sec__title" style="margin-top:0" data-i18n="admin.006">เข้าสู่ระบบผู้ดูแล</h2>
+    <form id="loginForm" novalidate>
+      <div class="fld"><label for="loginPassword" data-i18n="admin.007">รหัสผ่านผู้ดูแล <span aria-hidden="true">*</span></label>
+        <input id="loginPassword" name="password" type="password" required autocomplete="current-password"></div>
+      <p class="fld__err" id="loginErr" role="alert" hidden></p>
+      <div class="admin__foot">
+        <button type="submit" class="btn btn--brand" id="loginBtn" data-i18n="admin.008">เข้าสู่ระบบ</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- ========== ADMIN APP (แสดงหลังเข้าสู่ระบบสำเร็จ) ========== -->
+  <div id="adminApp" hidden>
+  <div style="display:flex;justify-content:flex-end;margin-bottom:12px">
+    <button type="button" class="btn btn--ghost btn--sm" id="logoutBtn" data-i18n="admin.009">ออกจากระบบ</button>
+  </div>
+
+  <div class="tabs admin-tabs" role="tablist" aria-label="ประเภทข้อมูลที่จัดการ" id="adminTabs" data-i18n-attr="aria-label:admin.066">
+    <button type="button" role="tab" aria-selected="true"  aria-controls="panel-news"     id="tab-news"     data-tab="news" data-i18n="c.004">ข่าวสารประจำจังหวัด</button>
+    <button type="button" role="tab" aria-selected="false" aria-controls="panel-travel"   id="tab-travel"   data-tab="travel" data-i18n="admin.010">ข้อมูลท่องเที่ยว</button>
+    <button type="button" role="tab" aria-selected="false" aria-controls="panel-products" id="tab-products" data-tab="products" data-i18n="admin.011">ของดีจังหวัด</button>
+  </div>
+
+  <!-- ========== NEWS PANEL ========== -->
+  <section class="admin__panel is-active" id="panel-news" role="tabpanel" aria-labelledby="tab-news">
+    <div class="admin__toolbar">
+      <div>
+        <h2 class="sec__title" style="margin:0" data-i18n="c.004">ข่าวสารประจำจังหวัด</h2>
+        <p class="sec__desc" data-i18n="admin.012">ทั้งหมด <b id="adminCount-news">0</b> รายการ</p>
+      </div>
+      <div class="admin__actions">
+        <button type="button" class="btn btn--brand btn--sm" data-add="news" data-i18n="admin.013">+ เพิ่มข่าวใหม่</button>
+        <button type="button" class="btn btn--ghost btn--sm" data-reset="news" data-i18n="admin.014">โหลดข้อมูลล่าสุด</button>
+      </div>
+    </div>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <caption class="sr-only" data-i18n="admin.015">รายการข่าวสารประจำจังหวัด</caption>
+        <thead><tr><th style="width:120px" data-i18n="admin.016">วันที่</th><th style="width:160px" data-i18n="admin.017">หมวด</th><th data-i18n="admin.018">หัวข้อข่าว</th><th style="width:160px" data-i18n="admin.019">การจัดการ</th></tr></thead>
+        <tbody id="adminBody-news"></tbody>
+      </table>
+    </div>
+
+    <form class="panel admin__form" id="form-news" data-type="news" hidden novalidate>
+      <h3 id="formTitle-news" data-i18n="admin.020">เพิ่มข่าวใหม่</h3>
+      <p class="admin__badge" data-i18n="admin.021">ฟิลด์ที่มี <span aria-hidden="true">*</span> จำเป็นต้องกรอก</p>
+      <input type="hidden" name="id">
+      <div class="admin__grid2">
+        <div class="fld"><label for="news-date" data-i18n="admin.022">วันที่ข่าว <span aria-hidden="true">*</span></label>
+          <input id="news-date" name="date" type="date" required></div>
+        <div class="fld"><label for="news-cat" data-i18n="admin.023">หมวดข่าว <span aria-hidden="true">*</span></label>
+          <select id="news-cat" name="cat" required></select></div>
+      </div>
+      <div class="fld"><label for="news-title" data-i18n="admin.024">หัวข้อข่าว <span aria-hidden="true">*</span></label>
+        <input id="news-title" name="title" required></div>
+      <div class="fld"><label for="news-ex" data-i18n="admin.025">สรุปย่อ <span aria-hidden="true">*</span></label>
+        <textarea id="news-ex" name="ex" rows="3" required></textarea></div>
+      <div class="admin__grid2">
+        <div class="fld"><label for="news-src" data-i18n="admin.026">แหล่งข่าว</label>
+          <input id="news-src" name="src" placeholder="เช่น สำนักงานประชาสัมพันธ์จังหวัดอุตรดิตถ์" data-i18n-attr="placeholder:admin.067"></div>
+        <div class="fld"><label for="news-srcUrl" data-i18n="admin.027">ลิงก์แหล่งข่าว</label>
+          <input id="news-srcUrl" name="srcUrl" type="url" placeholder="https://..."></div>
+      </div>
+      <div class="fld"><label for="news-imgFile" data-i18n="admin.028">รูปภาพประกอบ (หน้ารายการ)</label>
+        <input id="news-imgFile" type="file" accept=".jpg,.jpeg,.png,.webp">
+        <input type="hidden" id="news-img" name="img">
+        <div class="img-preview" id="news-imgPreview" hidden><img alt="ตัวอย่างรูปภาพที่เลือก" data-i18n-attr="alt:admin.068"><button type="button" class="btn btn--ghost btn--sm" data-clear-img="news" data-i18n="admin.029">ลบรูปภาพ</button></div>
+      </div>
+
+      <h4 style="margin:18px 0 0" data-i18n="admin.030">เนื้อหาเต็ม (แสดงในหน้ารายละเอียดข่าว)</h4>
+      <p class="admin__badge" data-i18n="admin.031">ไม่บังคับกรอก — ถ้าเว้นว่างหน้ารายละเอียดจะแสดงสรุปย่อแทน</p>
+      <div class="admin__grid2">
+        <div class="fld"><label for="news-body-caption" data-i18n="admin.032">คำบรรยายภาพ (caption)</label>
+          <input id="news-body-caption" name="body_caption"></div>
+        <div class="fld"><label for="news-body-cover" data-i18n="admin.033">รูปปกหน้ารายละเอียด (ถ้าต่างจากรูปประกอบด้านบน)</label>
+          <input id="news-body-cover" name="body_cover" placeholder="assets/img/... หรือเว้นว่างเพื่อใช้รูปประกอบ" data-i18n-attr="placeholder:admin.069"></div>
+      </div>
+      <div class="fld"><label for="news-body-html" data-i18n="admin.034">เนื้อหาเต็ม (HTML)</label>
+        <textarea id="news-body-html" name="body_html" rows="8" placeholder="&lt;p&gt;เนื้อหาข่าวแบบเต็ม...&lt;/p&gt;" data-i18n-attr="placeholder:admin.070"></textarea></div>
+      <div class="fld"><label for="news-body-tags" data-i18n="admin.035">แท็ก (คั่นด้วยจุลภาค)</label>
+        <input id="news-body-tags" name="body_tags" placeholder="เช่น คุณธรรม, วัฒนธรรม" data-i18n-attr="placeholder:admin.071"></div>
+
+      <h4 style="margin:18px 0 0" data-i18n="admin.en.head">เวอร์ชันภาษาอังกฤษ (English)</h4>
+      <p class="admin__badge" data-i18n="admin.en.hint">ไม่บังคับกรอก — ถ้าเว้นว่าง หน้าเว็บในโหมด English จะแสดงข้อความภาษาไทยแทน</p>
+      <div class="fld"><label for="news-title-en" data-i18n="admin.en.newsTitle">หัวข้อข่าว (English)</label>
+        <input id="news-title-en" name="title_en" lang="en"></div>
+      <div class="fld"><label for="news-ex-en" data-i18n="admin.en.summary">สรุปย่อ (English)</label>
+        <textarea id="news-ex-en" name="ex_en" rows="3" lang="en"></textarea></div>
+      <div class="fld"><label for="news-src-en" data-i18n="admin.en.source">แหล่งข่าว (English)</label>
+        <input id="news-src-en" name="src_en" lang="en"></div>
+      <div class="fld"><label for="news-body-caption-en" data-i18n="admin.en.caption">คำบรรยายภาพ (English)</label>
+        <input id="news-body-caption-en" name="body_caption_en" lang="en"></div>
+      <div class="fld"><label for="news-body-html-en" data-i18n="admin.en.html">เนื้อหาเต็ม HTML (English)</label>
+        <textarea id="news-body-html-en" name="body_html_en" rows="8" lang="en"></textarea></div>
+      <div class="fld"><label for="news-body-tags-en" data-i18n="admin.en.tags">แท็ก (English, คั่นด้วยจุลภาค)</label>
+        <input id="news-body-tags-en" name="body_tags_en" lang="en"></div>
+
+      <p class="fld__err" id="err-news" role="alert" hidden></p>
+      <div class="admin__foot">
+        <button type="submit" class="btn btn--brand" data-i18n="admin.036">บันทึก</button>
+        <button type="button" class="btn btn--ghost" data-cancel-form="news" data-i18n="admin.037">ยกเลิก</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- ========== TRAVEL PANEL ========== -->
+  <section class="admin__panel" id="panel-travel" role="tabpanel" aria-labelledby="tab-travel" hidden>
+    <div class="admin__toolbar">
+      <div>
+        <h2 class="sec__title" style="margin:0" data-i18n="admin.010">ข้อมูลท่องเที่ยว</h2>
+        <p class="sec__desc" data-i18n="admin.038">ทั้งหมด <b id="adminCount-travel">0</b> รายการ</p>
+      </div>
+      <div class="admin__actions">
+        <button type="button" class="btn btn--brand btn--sm" data-add="travel" data-i18n="admin.039">+ เพิ่มสถานที่ใหม่</button>
+        <button type="button" class="btn btn--ghost btn--sm" data-reset="travel" data-i18n="admin.014">โหลดข้อมูลล่าสุด</button>
+      </div>
+    </div>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <caption class="sr-only" data-i18n="admin.040">รายการสถานที่ท่องเที่ยว</caption>
+        <thead><tr><th data-i18n="admin.041">ชื่อสถานที่</th><th style="width:150px" data-i18n="admin.017">หมวด</th><th style="width:160px" data-i18n="admin.019">การจัดการ</th></tr></thead>
+        <tbody id="adminBody-travel"></tbody>
+      </table>
+    </div>
+
+    <form class="panel admin__form" id="form-travel" data-type="travel" hidden novalidate>
+      <h3 id="formTitle-travel" data-i18n="admin.042">เพิ่มสถานที่ท่องเที่ยวใหม่</h3>
+      <p class="admin__badge" data-i18n="admin.021">ฟิลด์ที่มี <span aria-hidden="true">*</span> จำเป็นต้องกรอก</p>
+      <input type="hidden" name="id">
+      <div class="fld"><label for="travel-t" data-i18n="admin.043">ชื่อสถานที่ <span aria-hidden="true">*</span></label>
+        <input id="travel-t" name="t" required></div>
+      <div class="fld"><label for="travel-s" data-i18n="admin.044">คำอธิบาย/ที่ตั้งโดยย่อ <span aria-hidden="true">*</span></label>
+        <textarea id="travel-s" name="s" rows="3" required></textarea></div>
+      <div class="admin__grid2">
+        <div class="fld"><label for="travel-tag" data-i18n="admin.045">หมวดหมู่ <span aria-hidden="true">*</span></label>
+          <input id="travel-tag" name="tag" list="travelTagList" required placeholder="เช่น ธรรมชาติ" data-i18n-attr="placeholder:admin.072">
+          <datalist id="travelTagList">
+            <option value="ธรรมชาติ"><option value="ศาสนสถาน"><option value="ประวัติศาสตร์"><option value="วัฒนธรรม">
+          </datalist></div>
+        <div class="fld"><label for="travel-imgFile" data-i18n="admin.046">รูปภาพประกอบ</label>
+          <input id="travel-imgFile" type="file" accept=".jpg,.jpeg,.png,.webp">
+          <input type="hidden" id="travel-img" name="img">
+          <div class="img-preview" id="travel-imgPreview" hidden><img alt="ตัวอย่างรูปภาพที่เลือก" data-i18n-attr="alt:admin.068"><button type="button" class="btn btn--ghost btn--sm" data-clear-img="travel" data-i18n="admin.029">ลบรูปภาพ</button></div>
+        </div>
+      </div>
+      <h4 style="margin:18px 0 0" data-i18n="admin.047">เนื้อหาเต็ม (แสดงในหน้ารายละเอียดสถานที่)</h4>
+      <p class="admin__badge" data-i18n="admin.048">ไม่บังคับกรอก — ถ้าเว้นว่างหน้ารายละเอียดจะแสดงคำอธิบายโดยย่อแทน</p>
+      <div class="fld"><label for="travel-body-html" data-i18n="admin.034">เนื้อหาเต็ม (HTML)</label>
+        <textarea id="travel-body-html" name="body_html" rows="8" placeholder="&lt;p&gt;เนื้อหาแบบเต็ม...&lt;/p&gt;" data-i18n-attr="placeholder:admin.073"></textarea></div>
+      <h4 style="margin:18px 0 0" data-i18n="admin.en.head">เวอร์ชันภาษาอังกฤษ (English)</h4>
+      <p class="admin__badge" data-i18n="admin.en.hint">ไม่บังคับกรอก — ถ้าเว้นว่าง หน้าเว็บในโหมด English จะแสดงข้อความภาษาไทยแทน</p>
+      <div class="fld"><label for="travel-t-en" data-i18n="admin.en.place">ชื่อสถานที่ (English)</label>
+        <input id="travel-t-en" name="t_en" lang="en"></div>
+      <div class="fld"><label for="travel-s-en" data-i18n="admin.en.desc">คำอธิบาย/ที่ตั้งโดยย่อ (English)</label>
+        <textarea id="travel-s-en" name="s_en" rows="3" lang="en"></textarea></div>
+      <div class="fld"><label for="travel-tag-en" data-i18n="admin.en.category">หมวดหมู่ (English)</label>
+        <input id="travel-tag-en" name="tag_en" lang="en" placeholder="e.g. Nature"></div>
+      <div class="fld"><label for="travel-body-html-en" data-i18n="admin.en.html">เนื้อหาเต็ม HTML (English)</label>
+        <textarea id="travel-body-html-en" name="body_html_en" rows="8" lang="en"></textarea></div>
+
+      <p class="fld__err" id="err-travel" role="alert" hidden></p>
+      <div class="admin__foot">
+        <button type="submit" class="btn btn--brand" data-i18n="admin.036">บันทึก</button>
+        <button type="button" class="btn btn--ghost" data-cancel-form="travel" data-i18n="admin.037">ยกเลิก</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- ========== PRODUCTS PANEL (ของดีจังหวัด) ========== -->
+  <section class="admin__panel" id="panel-products" role="tabpanel" aria-labelledby="tab-products" hidden>
+    <div class="admin__toolbar">
+      <div>
+        <h2 class="sec__title" style="margin:0" data-i18n="admin.049">ของดีจังหวัด <span>GI / OTOP</span></h2>
+        <p class="sec__desc" data-i18n="admin.050">ทั้งหมด <b id="adminCount-products">0</b> รายการ</p>
+      </div>
+      <div class="admin__actions">
+        <button type="button" class="btn btn--brand btn--sm" data-add="products" data-i18n="admin.051">+ เพิ่มของดีใหม่</button>
+        <button type="button" class="btn btn--ghost btn--sm" data-reset="products" data-i18n="admin.014">โหลดข้อมูลล่าสุด</button>
+      </div>
+    </div>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <caption class="sr-only" data-i18n="admin.052">รายการของดีจังหวัด (สินค้า GI/OTOP)</caption>
+        <thead><tr><th style="width:96px" data-i18n="admin.053">รูปภาพ</th><th data-i18n="admin.054">ชื่อสินค้า</th><th style="width:150px" data-i18n="admin.055">ประเภท</th><th style="width:160px" data-i18n="admin.019">การจัดการ</th></tr></thead>
+        <tbody id="adminBody-products"></tbody>
+      </table>
+    </div>
+
+    <form class="panel admin__form" id="form-products" data-type="products" hidden novalidate>
+      <h3 id="formTitle-products" data-i18n="admin.056">เพิ่มของดีจังหวัดใหม่</h3>
+      <p class="admin__badge" data-i18n="admin.021">ฟิลด์ที่มี <span aria-hidden="true">*</span> จำเป็นต้องกรอก</p>
+      <input type="hidden" name="id">
+      <div class="fld"><label for="prod-t" data-i18n="admin.057">ชื่อสินค้า <span aria-hidden="true">*</span></label>
+        <input id="prod-t" name="t" required></div>
+      <div class="admin__grid2">
+        <div class="fld"><label for="prod-type" data-i18n="admin.058">ประเภท <span aria-hidden="true">*</span></label>
+          <select id="prod-type" name="type" required>
+            <option value="gi" data-i18n="admin.059">สินค้า GI (สิ่งบ่งชี้ทางภูมิศาสตร์)</option>
+            <option value="otop" data-i18n="nav.otop">สินค้า OTOP</option>
+          </select></div>
+        <div class="fld"><label for="prod-tag" data-i18n="admin.060">ป้ายกำกับที่แสดงผล</label>
+          <input id="prod-tag" name="tag" placeholder="เช่น สินค้า GI" data-i18n-attr="placeholder:admin.074"></div>
+      </div>
+      <div class="fld"><label for="prod-s" data-i18n="admin.061">คำอธิบาย <span aria-hidden="true">*</span></label>
+        <textarea id="prod-s" name="s" rows="3" required></textarea></div>
+      <div class="fld"><label for="products-imgFile" data-i18n="admin.062">รูปภาพสินค้า</label>
+        <input id="products-imgFile" type="file" accept=".jpg,.jpeg,.png,.webp" aria-describedby="products-imgHint">
+        <input type="hidden" id="products-img" name="img">
+        <small class="fld__hint" id="products-imgHint" data-i18n="admin.063">รองรับ .jpg .jpeg .png .webp ขนาดไม่เกิน 5 MB — รูปจะถูกอัปโหลดเมื่อกด “บันทึก” เท่านั้น ถ้าไม่เลือกไฟล์ใหม่จะใช้รูปเดิม</small>
+        <div class="img-preview" id="products-imgPreview" hidden><img alt="ตัวอย่างรูปภาพสินค้าที่เลือก" data-i18n-attr="alt:admin.075"><button type="button" class="btn btn--ghost btn--sm" data-clear-img="products" data-i18n="admin.029">ลบรูปภาพ</button></div>
+      </div>
+
+      <h4 style="margin:18px 0 0" data-i18n="admin.064">เนื้อหาเต็ม (แสดงในหน้ารายละเอียดสินค้า)</h4>
+      <p class="admin__badge" data-i18n="admin.048">ไม่บังคับกรอก — ถ้าเว้นว่างหน้ารายละเอียดจะแสดงคำอธิบายโดยย่อแทน</p>
+      <div class="fld"><label for="prod-body-html" data-i18n="admin.034">เนื้อหาเต็ม (HTML)</label>
+        <textarea id="prod-body-html" name="body_html" rows="8" placeholder="&lt;p&gt;เนื้อหาแบบเต็ม...&lt;/p&gt;" data-i18n-attr="placeholder:admin.073"></textarea></div>
+      <div class="fld"><label for="prod-body-tags" data-i18n="admin.035">แท็ก (คั่นด้วยจุลภาค)</label>
+        <input id="prod-body-tags" name="body_tags" placeholder="เช่น GI, ทุเรียน, ลับแล" data-i18n-attr="placeholder:admin.076"></div>
+
+      <h4 style="margin:18px 0 0" data-i18n="admin.en.head">เวอร์ชันภาษาอังกฤษ (English)</h4>
+      <p class="admin__badge" data-i18n="admin.en.hint">ไม่บังคับกรอก — ถ้าเว้นว่าง หน้าเว็บในโหมด English จะแสดงข้อความภาษาไทยแทน</p>
+      <div class="fld"><label for="prod-t-en" data-i18n="admin.en.product">ชื่อสินค้า (English)</label>
+        <input id="prod-t-en" name="t_en" lang="en"></div>
+      <div class="fld"><label for="prod-tag-en" data-i18n="admin.en.label">ป้ายกำกับที่แสดงผล (English)</label>
+        <input id="prod-tag-en" name="tag_en" lang="en" placeholder="e.g. GI Product"></div>
+      <div class="fld"><label for="prod-s-en" data-i18n="admin.en.descProd">คำอธิบาย (English)</label>
+        <textarea id="prod-s-en" name="s_en" rows="3" lang="en"></textarea></div>
+      <div class="fld"><label for="prod-body-html-en" data-i18n="admin.en.html">เนื้อหาเต็ม HTML (English)</label>
+        <textarea id="prod-body-html-en" name="body_html_en" rows="8" lang="en"></textarea></div>
+      <div class="fld"><label for="prod-body-tags-en" data-i18n="admin.en.tags">แท็ก (English, คั่นด้วยจุลภาค)</label>
+        <input id="prod-body-tags-en" name="body_tags_en" lang="en"></div>
+
+      <p class="fld__err" id="err-products" role="alert" hidden></p>
+      <div class="admin__foot">
+        <button type="submit" class="btn btn--brand" data-i18n="admin.036">บันทึก</button>
+        <button type="button" class="btn btn--ghost" data-cancel-form="products" data-i18n="admin.037">ยกเลิก</button>
+      </div>
+    </form>
+  </section>
+
+  </div><!-- /#adminApp -->
+
+</main>
+
+<script src="../js/img-fallback.js"></script>
+<script src="../js/ui.js"></script>
+<script src="../js/config.js"></script>
+<script src="../js/shell.js"></script>
+<script src="../js/admin-api.js"></script>
+<script src="../js/page-admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+/* ============================================================
+   CLOUD GATE — CSS ของเอฟเฟกต์ Page Transition
+   ย้ายมาจาก cloud-gate-demo4.html แบบคงโครงสร้าง/พฤติกรรมเดิมทั้งหมด
+   (.cloud-gate, .cloud-gate__base, .cloud-gate__puff, prefers-reduced-motion)
+   เปลี่ยนเพียงอย่างเดียว: z-index ให้ "สูงกว่า" preloader เดิม (.pl = 9999)
+   เพื่อให้ตอนโหลดครบ 100% เมฆสามารถ "เข้ามาบัง" ทับหน้าจอ preloader เดิมที่ยัง
+   แสดงอยู่ได้จริง (มองเห็นแอนิเมชันเมฆพัดเข้ามา) แล้วค่อยเปิดออกอีกที
+   (ดูรายละเอียดการผสานใน js/cloud-gate.js)
+   ใช้ร่วมกับ js/cloud-gate.js — ต้อง include ทั้งคู่ในหน้าที่ต้องการ Cloud Gate
+   ============================================================ */
+
+.cloud-gate{
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10000; /* สูงกว่า preloader เดิม (9999) เสมอ เพื่อให้เมฆเข้ามาบังทับได้ */
+  overflow: hidden;
+  pointer-events: none;
+  contain: strict;
+}
+.cloud-gate.is-interactive{ pointer-events: auto; }
+
+/* Two large overlapping base slabs guarantee 100% coverage with
+   ZERO transparent gaps at the seam. They are a SOLID gradient —
+   not the cloud texture — because the reference cloud photo has
+   large fully-transparent regions (soft/foggy edges by design);
+   tiling it with background-repeat leaves a checkerboard of gaps.
+   A solid backing sits underneath everything and the cloud
+   texture is layered on top of it via the decorative puffs, so
+   the finished result still reads as "solid bank of cloud". */
+.cloud-gate__base{
+  position: absolute;
+  top: -10vh;
+  height: 120vh;
+  /* กว้าง 130vw: ตอนปิดสนิท ส่วนที่ทึบเต็ม (ก่อนถึงโซนขอบนุ่ม) ของแต่ละแผ่น
+     ครอบคลุมจอทั้งหมดร่วมกัน ส่วนตอนอยู่นอกจอ โซนขอบนุ่มจะอยู่นอกจอทั้งหมด */
+  width: 130vw;
+  will-change: transform;
+}
+/* Identical gradient (same colors, same direction) on both slabs
+   so wherever they overlap in the middle, the backing color
+   matches exactly and no seam line is visible. */
+.cloud-gate__base--left,
+.cloud-gate__base--right{
+  background: linear-gradient(180deg, #eef1f5 0%, #dee5ec 50%, #cdd6e0 100%);
+}
+.cloud-gate__base--left{
+  left: 0;
+  transform: translate3d(-100%, 0, 0);
+  -webkit-mask-image: linear-gradient(to right,
+    #000 0%, #000 65%, rgba(0,0,0,.85) 72%, rgba(0,0,0,.55) 82%,
+    rgba(0,0,0,.2) 92%, transparent 100%);
+          mask-image: linear-gradient(to right,
+    #000 0%, #000 65%, rgba(0,0,0,.85) 72%, rgba(0,0,0,.55) 82%,
+    rgba(0,0,0,.2) 92%, transparent 100%);
+}
+.cloud-gate__base--right{
+  right: 0;
+  transform: translate3d(100%, 0, 0);
+  -webkit-mask-image: linear-gradient(to left,
+    #000 0%, #000 65%, rgba(0,0,0,.85) 72%, rgba(0,0,0,.55) 82%,
+    rgba(0,0,0,.2) 92%, transparent 100%);
+          mask-image: linear-gradient(to left,
+    #000 0%, #000 65%, rgba(0,0,0,.85) 72%, rgba(0,0,0,.55) 82%,
+    rgba(0,0,0,.2) 92%, transparent 100%);
+}
+
+/* Decorative puffs: many reused copies of the same texture at
+   varied size/position/rotation/opacity to fake volume + break
+   up the straight seam between the two base slabs. */
+.cloud-gate__puff{
+  position: absolute;
+  background-image: var(--cg-texture-a);
+  background-size: cover;
+  background-repeat: no-repeat;
+  will-change: transform;
+  /* two-axis scale() lets mirroring (negative --sx/--sy) coexist
+     safely with the animated translate/rotate — never overwritten
+     by an inline style.transform assignment. */
+  transform: translate3d(var(--tx, 0), 0, 0) rotate(var(--rot, 0deg)) scale(var(--sx, 1), var(--sy, 1));
+  transition-property: transform;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .cloud-gate__base, .cloud-gate__puff{ transition-duration: 1ms !important; }
+}
+
+/* ระหว่างกำลังเปลี่ยนหน้า กันการคลิกซ้ำ/การโต้ตอบกับ UI เบื้องหลังโดยไม่จำเป็น
+   (ตัว .cloud-gate เองบัง full-screen อยู่แล้วเมื่อ .is-interactive ทำงาน — คลาสนี้
+   เป็นเพียงตัวช่วยส่ง cursor feedback ให้ผู้ใช้ ไม่ได้ปิดกั้นอะไรเพิ่มเติม) */
+html.cloud-gate-busy{ cursor: progress; }

@@ -1,0 +1,19 @@
+# api/wrangler.toml — การตั้งค่า Deploy สำหรับ Cloudflare Worker (Secure API layer)
+# วิธีใช้: ดูขั้นตอนละเอียดใน README.md หัวข้อ "Deploy Secure API (Cloudflare Workers)"
+
+name = "uttaradit-admin-api"
+main = "worker.js"
+compatibility_date = "2024-11-01"
+
+# ค่าที่ไม่ใช่ความลับ (public vars) — แก้ให้ตรงกับ repo/URL จริงของคุณ
+[vars]
+GITHUB_OWNER   = "Film1579"
+GITHUB_REPO    = "web-Uttaradit"
+GITHUB_BRANCH  = "main"
+ALLOWED_ORIGIN = "https://film1579.github.io"
+
+# ค่าที่เป็นความลับ (secrets) — "ห้าม" ใส่ในไฟล์นี้เด็ดขาด
+# ตั้งค่าด้วยคำสั่งต่อไปนี้แทน (จะถูกถามค่าแบบซ่อน ไม่หลุดไปอยู่ใน source code หรือ git):
+#   wrangler secret put GITHUB_TOKEN
+#   wrangler secret put ADMIN_PASSWORD_HASH
+#   wrangler secret put SESSION_SECRET

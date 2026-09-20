@@ -1,0 +1,119 @@
+/* ===========================================================
+   css/home-local.css
+   สไตล์เฉพาะของ "ระบบของดีจังหวัดอุตรดิตถ์" บนหน้าแรก (#local)
+   — Auto-rotating Showcase: 1 หัวข้อหลัก + 4 หัวข้อย่อย, infinite loop
+   แยกไฟล์ต่างหากจาก style.css/pages.css เพื่อไม่กระทบหน้าอื่น
+   ใช้ตัวแปรสี/รัศมี/เงาจาก :root ใน style.css (โทนเดียวกับทั้งเว็บไซต์)
+   =========================================================== */
+
+.hls{ position:relative; display:grid; grid-template-columns:1.15fr .85fr; gap:32px; align-items:stretch; }
+
+/* ---------- หัวข้อหลัก (Featured) ---------- */
+.hls__featured{
+  position:relative; isolation:isolate; overflow:hidden;
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+/* รายการที่ "กำลังแสดงอยู่" อยู่ใน normal flow เสมอ ทำให้ความสูงของกล่องคำนวณจากเนื้อหาจริง
+   (ไม่ collapse บนมือถือ, ไม่ตัดข้อความ) — จะใช้ position:absolute เฉพาะตัวที่ "กำลังจะออก" (is-leaving)
+   เพื่อวางซ้อนทับระหว่าง transition เท่านั้น */
+.hls__featItem{
+  display:grid; grid-template-columns:1fr; grid-template-rows:auto auto;
+  will-change:transform,opacity;
+}
+.hls__featItem.is-leaving{ position:absolute; inset:0; z-index:2; }
+.hls__featMedia{
+  position:relative; aspect-ratio:16/9; overflow:hidden; background:var(--tint);
+}
+.hls__featMedia img{ width:100%; height:100%; object-fit:cover; display:block; }
+.hls__featBody{ display:grid; align-content:start; gap:10px; padding:22px 26px 26px; min-height:0; }
+.hls__featTitle{
+  font-family:var(--ff-head); font-size:1.34rem; margin:0; color:var(--ink);
+  display:-webkit-box; -webkit-line-clamp:1; -webkit-box-orient:vertical; overflow:hidden;
+}
+.hls__featDesc{
+  margin:0; color:var(--muted); font-size:.96rem; line-height:1.65;
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+}
+.hls__featCta{ justify-self:start; margin-top:4px; }
+
+/* --- Animation: Pop-up + Move Out to Right (หัวข้อหลัก) ---
+   ออกแบบใหม่ให้ "การ์ดเดิม" คงทึบแสง (opacity:1) ตลอดช่วงยกตัว+เริ่มเลื่อนออก แล้วค่อยจางหายไปพร้อมกับ
+   เลื่อนพ้นกรอบไปทางขวาอย่างชัดเจน (ใช้ translateX เป็น % ของความกว้างตัวเอง เพื่อให้พ้นกรอบจริงทุกขนาดจอ)
+   ส่วน "การ์ดใหม่" จะถูกซ่อนสนิท (opacity:0) จนกว่าการ์ดเดิมจะเริ่มเลื่อนออกไปพอสมควรแล้วจึงค่อยจางเข้ามา
+   — ป้องกันปัญหาข้อความสองชุดซ้อนทับ/พร่าเป็นเนื้อเดียวกัน (double-exposure) ระหว่าง transition */
+.hls__featItem.is-leaving{ animation:hlsFeatOut var(--hls-dur,760ms) var(--ease) forwards; z-index:2; }
+.hls__featItem.is-entering{ animation:hlsFeatIn var(--hls-dur,760ms) var(--ease) forwards; z-index:1; }
+@keyframes hlsFeatOut{
+  0%{   transform:translate3d(0,0,0) scale(1);         opacity:1; }
+  32%{  transform:translate3d(0,-10px,0) scale(1.035);  opacity:1; }
+  100%{ transform:translate3d(120%,-4px,0) scale(.94);  opacity:0; }
+}
+@keyframes hlsFeatIn{
+  0%,38%{ transform:translate3d(-22px,10px,0) scale(.96); opacity:0; }
+  100%{   transform:translate3d(0,0,0) scale(1);           opacity:1; }
+}
+
+/* ---------- หัวข้อย่อย (Sub-items) ---------- */
+.hls__subwrap{ display:flex; flex-direction:column; gap:16px; }
+.hls__subgrid{
+  display:grid; grid-template-columns:1fr 1fr; gap:14px; list-style:none; margin:0; padding:0; flex:1;
+}
+.hls__subgrid li{ transform-origin:center top; }
+/* จังหวะขั้นบันได: ให้แต่ละ card เยื้องระดับกันเล็กน้อย (แถวบน 2 ใบระดับปกติ, แถวล่าง 2 ใบขยับลงอีกนิด) */
+.hls__subgrid li:nth-child(3),
+.hls__subgrid li:nth-child(4){ margin-top:8px; }
+
+.hls__subCard{ display:flex; align-items:center; gap:12px; background:var(--surface); border:1px solid var(--line);
+  border-radius:var(--radius-sm); padding:14px; height:100%; color:var(--ink); transition:.25s var(--ease); }
+.hls__subCard:hover,.hls__subCard:focus-visible{ border-color:var(--brand-300); box-shadow:var(--shadow); transform:translateY(-3px); text-decoration:none; }
+.hls__subMedia{ flex:none; width:52px; height:52px; border-radius:10px; overflow:hidden; background:var(--tint); }
+.hls__subMedia img{ width:100%; height:100%; object-fit:cover; }
+.hls__subBody{ display:grid; gap:3px; min-width:0; }
+.hls__subBody b{ font-family:var(--ff-head); font-size:.92rem; line-height:1.3;
+  display:-webkit-box; -webkit-line-clamp:1; -webkit-box-orient:vertical; overflow:hidden; }
+.hls__subBody small{ color:var(--muted); font-size:.78rem; }
+
+/* --- Animation: Slide + Bounce / Pop-in แบบขั้นบันได (หัวข้อย่อย) --- */
+.hls__subgrid li.hls-sub-enter{
+  animation:hlsSubIn 640ms var(--hls-sub-ease,cubic-bezier(.34,1.56,.64,1)) both;
+  animation-delay:var(--hls-sub-delay,0ms);
+}
+@keyframes hlsSubIn{
+  0%{   transform:translate3d(0,22px,0) scale(.9);  opacity:0; }
+  60%{  transform:translate3d(0,-4px,0) scale(1.035); opacity:1; }
+  100%{ transform:translate3d(0,0,0) scale(1);        opacity:1; }
+}
+.hls__subgrid li.hls-sub-leave{ animation:hlsSubOut 180ms ease-in forwards; }
+@keyframes hlsSubOut{ to{ transform:translate3d(0,-8px,0); opacity:0; } }
+
+/* ---------- Reduced motion: ปิด motion แรง ใช้การจาง (fade) แบบเรียงลำดับ ไม่ซ้อนกันเช่นกัน ---------- */
+.hls.hls--reduced .hls__featItem.is-leaving{ animation:hlsFadeOut 200ms linear forwards; }
+.hls.hls--reduced .hls__featItem.is-entering{ animation:hlsFadeIn 200ms linear 180ms forwards; opacity:0; }
+@keyframes hlsFadeOut{ to{ opacity:0; } }
+@keyframes hlsFadeIn{ from{ opacity:0; } to{ opacity:1; } }
+.hls.hls--reduced .hls__subgrid li.hls-sub-enter{ animation:hlsFadeIn 200ms linear both; animation-delay:0ms !important; }
+.hls.hls--reduced .hls__subgrid li.hls-sub-leave{ animation:hlsFadeOut 120ms linear forwards; }
+
+@media (prefers-reduced-motion: reduce){
+  .hls__featItem.is-leaving,.hls__featItem.is-entering{ animation:hlsFadeIn 1ms linear both; }
+  .hls__subgrid li.hls-sub-enter{ animation:none; opacity:1; transform:none; }
+}
+
+/* ---------- Swipe affordance (ไม่มีปุ่ม แต่บอกว่าปัดได้) ---------- */
+.hls{ touch-action:pan-y; }
+.hls__featured{ cursor:grab; }
+.hls__featured:active{ cursor:grabbing; }
+
+/* ---------- Responsive ---------- */
+@media (max-width:900px){
+  .hls{ grid-template-columns:1fr; }
+  .hls__featTitle{ font-size:1.2rem; }
+}
+@media (max-width:560px){
+  .hls__subgrid{ grid-template-columns:1fr 1fr; gap:10px; }
+  .hls__subgrid li:nth-child(3),.hls__subgrid li:nth-child(4){ margin-top:0; }
+  .hls__featBody{ padding:16px 16px 20px; }
+}
+
+/* ---------- Dark theme / High contrast: สืบทอดตัวแปรสีเดิม ไม่ต้อง override เพิ่ม ---------- */

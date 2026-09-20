@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="ทุเรียนหลงลับแล">
+  <defs>
+    <linearGradient id="g1h" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1E6F70"/><stop offset="1" stop-color="#0B2A2B"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#g1h)"/>
+  <circle cx="400" cy="180" r="90" fill="none" stroke="#C79B3B" stroke-width="3" opacity=".8"/>
+  <text x="400" y="196" font-family="sans-serif" font-size="58" font-weight="700" fill="#E4C378" text-anchor="middle">01</text>
+  <text x="400" y="300" font-family="sans-serif" font-size="34" font-weight="600" fill="#FFFFFF" text-anchor="middle">ทุเรียนหลงลับแล</text>
+  <text x="400" y="340" font-family="sans-serif" font-size="19" fill="#C79B3B" text-anchor="middle">ของดีจังหวัดอุตรดิตถ์ · GI · placeholder 800x450</text>
+</svg>

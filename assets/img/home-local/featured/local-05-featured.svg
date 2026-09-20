@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-hidden="true">
+  <defs>
+    <linearGradient id="g5f" x1="0" y1="0" x2="1" y2="1" gradientTransform="rotate(145 .5 .5)">
+      <stop offset="0" stop-color="#12484A"/>
+      <stop offset="1" stop-color="#0B2A2B"/>
+    </linearGradient>
+    <pattern id="p5f" width="60" height="60" patternUnits="userSpaceOnUse">
+      <circle cx="30" cy="30" r="1.4" fill="#57A3A0" opacity=".25"/>
+    </pattern>
+  </defs>
+  <rect width="960" height="540" fill="url(#g5f)"/>
+  <rect width="960" height="540" fill="url(#p5f)"/>
+  <g transform="translate(480,270) scale(1.9) translate(-100,-100)"><g stroke="#C79B3B" stroke-width="4" fill="none" stroke-linecap="round">
+        <path d="M100,40 L100,80" stroke-width="5"/>
+        <circle cx="82" cy="96" r="16" fill="#E4C378" opacity=".18"/><circle cx="82" cy="96" r="16"/>
+        <circle cx="118" cy="96" r="16" fill="#E4C378" opacity=".18"/><circle cx="118" cy="96" r="16"/>
+        <circle cx="100" cy="122" r="16" fill="#E4C378" opacity=".18"/><circle cx="100" cy="122" r="16"/>
+        <circle cx="78" cy="140" r="14" fill="#E4C378" opacity=".18"/><circle cx="78" cy="140" r="14"/>
+        <circle cx="122" cy="140" r="14" fill="#E4C378" opacity=".18"/><circle cx="122" cy="140" r="14"/>
+      </g></g>
+</svg>
