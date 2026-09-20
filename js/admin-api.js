@@ -7,7 +7,7 @@ window.AdminAPI = (function () {
   "use strict";
 
   // TODO: แก้เป็น URL จริงหลัง deploy Worker แล้ว (ดู README.md หัวข้อ "Deploy Secure API")
-  const WORKER_URL = "https://uttaradit-admin-api.kenzo15788.workers.dev/";
+  const WORKER_URL = "https://uttaradit-admin-api.kenzo15788.workers.dev";
 
   const SESSION_KEY = "utt_admin_session"; // เก็บใน sessionStorage: token สำหรับ "การยืนยันตัวตน" เท่านั้น
   // หมายเหตุ: นี่ไม่ใช่การฝ่าฝืนข้อ 22 (ห้าม localStorage เป็นฐานข้อมูล) เพราะเก็บแค่ session token
