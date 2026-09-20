@@ -31,7 +31,7 @@
 </div></div>
 <header class="hd" id="header"><div class="container hd__in">
   <a class="hd__brand" href="${B}index.html">
-    <img src="${B}assets/img/icon-192.png" alt="ตราประจำจังหวัดอุตรดิตถ์" data-i18n-attr="alt:brand.sealAlt" width="52" height="52">
+    <img src="${B}assets/img/logo.png" alt="ตราประจำจังหวัดอุตรดิตถ์" data-i18n-attr="alt:brand.sealAlt" width="52" height="52">
     <span><b data-i18n="brand.name">จังหวัดอุตรดิตถ์</b><small data-i18n="brand.sub">Uttaradit Province</small></span></a>
   <button class="hd__burger" id="burger" aria-expanded="false" aria-controls="nav" aria-label="เปิดเมนู" data-i18n-attr="aria-label:nav.open"><i></i><i></i><i></i></button>
   <nav class="nav" id="nav" aria-label="เมนูหลัก" data-i18n-attr="aria-label:nav.main"><ul class="nav__list">
