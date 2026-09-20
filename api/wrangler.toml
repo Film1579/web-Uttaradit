@@ -1,7 +1,7 @@
 # api/wrangler.toml — การตั้งค่า Deploy สำหรับ Cloudflare Worker (Secure API layer)
 # วิธีใช้: ดูขั้นตอนละเอียดใน README.md หัวข้อ "Deploy Secure API (Cloudflare Workers)"
 
-name = "uttaradit-admin-api"
+name = "web-uttaradit"
 main = "worker.js"
 compatibility_date = "2024-11-01"
 
