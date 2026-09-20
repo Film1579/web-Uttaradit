@@ -373,6 +373,7 @@
         try {
           document.body.classList.remove('is-preloading');
           preloaderEl && preloaderEl.setAttribute('aria-hidden', 'true');
+          preloaderEl && (preloaderEl.style.display = 'none');
         } catch (e) {}
       }
 
@@ -416,7 +417,7 @@
       }
     }
     // ตาข่ายนิรภัย: ไม่ว่ากรณีใดก็ตาม ต้องไม่ปล่อยให้จอถูกปิดค้างถาวรเกิน ~9 วินาที
-    setTimeout(reveal, 9000);
+    setTimeout(reveal, 14000);
 
     /* ---------------------------------------------------------------------
        ตรวจสอบว่า URL เป็นลิงก์ "ภายในเว็บไซต์เดียวกัน" หรือไม่
